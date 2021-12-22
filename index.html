@@ -20,12 +20,14 @@
       </button>
     </div>
     <div id="sounds-container">
-      <div class="sound"><img src="" alt="" class="sound-img"><input type="range" name="sound-volume" min="0" max="100"
-          step="2"></div>
-      <div class="sound"><img src="" alt="" class="sound-img"><input type="range" name="sound-volume" min="0" max="100"
-          step="2"></div>
-      <div class="sound"><img src="" alt="" class="sound-img"><input type="range" name="sound-volume" min="0" max="100"
-          step="2"></div>
+      <div class="sound">
+        <img src="" alt="waves on beach" class="sound-img"><input type="range" name="sound-volume" min="0" max="100"
+          step="2">
+      </div>
+      <div class="sound"><img src="" alt="fire" class="sound-img"><input type="range" name="sound-volume" min="0"
+          max="100" step="2"></div>
+      <div class="sound"><img src="" alt="traffic in distance" class="sound-img"><input type="range" name="sound-volume"
+          min="0" max="100" step="2"></div>
     </div>
     <div id="master-volume-container">
       <label for="master-volume">Master volume</label>
@@ -36,7 +38,32 @@
   <div id="footer">
 
   </div>
+  <!-- https://www.soundjay.com/transportation/sounds/highway-1.mp3 -->
+  <!-- crossOrigin="anonymous" -->
+  <iframe frameborder="0" width="400" height="200"
+    src="https://www2.cs.uic.edu/~i101/SoundFiles/BabyElephantWalk60.wav">
+  </iframe>
+  <audio controls crossorigin="use-credentials" name="highway-sounds">
+    <source scr="https://www2.cs.uic.edu/~i101/SoundFiles/BabyElephantWalk60.wav" type="audio/x-wav" />
+  </audio>
+  <audio controls id="fire-sounds">
+    <source scr="https://www.soundjay.com/nature/sounds/campfire-1.mp3" type="audio/mpeg" />
+  </audio>
+  <audio controls id="wave-sounds">
+    <source scr="https://www.soundjay.com/nature/sounds/ocean-wave-1.mp3" type="audio/mpeg">
+  </audio>
 
+  <script>
+    // declare an object for each sound
+    // attributes include volume level (default 1/4), reference to audio element 
+
+    // reference to play/pause button
+    // collect references to all audio sources in object
+    // for each range, hook it up to its audio volume control
+
+    // function that decreases volume for all 
+    // reference for master volume
+  </script>
 </body>
 
 </html>
