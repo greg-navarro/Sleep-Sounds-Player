@@ -50,22 +50,31 @@
 
   <script>
     // declare an object for each sound
-    let highway = {
-      volume: 50,
-      audioElement: document.getElementById("highway-audio")
-    }
-    let fire = {
-      volume: 50,
-      audioElement: document.getElementById("fire-audio")
-    }
-    let waves = {
-      volume: 50,
-      audioElement: document.getElementById("wave-audio")
+    // attributes include volume level (default 1/4), reference to audio element
+    let sounds = {
+      highway: {
+        volume: 50,
+        audioElement: document.getElementById("highway-audio")
+      },
+      fire: {
+        volume: 50,
+        audioElement: document.getElementById("fire-audio")
+      },
+      waves: {
+        volume: 50,
+        audioElement: document.getElementById("wave-audio")
+      }
     }
 
-    // attributes include volume level (default 1/4), reference to audio element
+
+    const audioContext = new AudioContext();
+
 
     // reference to play/pause button
+    const playButton = document.getElementById("play-pause");
+    playButton.addEventListener('click', function () {
+
+    }, false);
     // collect references to all audio sources in object
     // for each range, hook it up to its audio volume control
 
