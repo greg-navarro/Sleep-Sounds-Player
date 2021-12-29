@@ -16,109 +16,85 @@
   <div id="content">
     <!-- play button -->
     <div id="play-container">
-      <button name="play-pause" type="button">
+      <button name="play-pause" type="button" id="play-pause">
         PLAY/PAUSE TODO: ADD IMAGES!!!
       </button>
     </div>
     <!-- sound ranges -->
     <div id="sounds-container">
       <div class="sound">
-        <img src="" alt="waves on beach" class="sound-img"><input type="range" name="sound-volume" min="0" max="100"
-          step="2">
+        <img src="" alt="waves on beach" class="sound-img"><input id="waves-range" type="range" name="sound-volume"
+          min="0" max="100" step="2">
       </div>
-      <div class="sound"><img src="" alt="fire" class="sound-img"><input type="range" name="sound-volume" min="0"
-          max="100" step="2"></div>
-      <div class="sound"><img src="" alt="traffic in distance" class="sound-img"><input type="range" name="sound-volume"
-          min="0" max="100" step="2"></div>
+      <div class="sound"><img src="" alt="fire" class="sound-img"><input id="fire-range" type="range"
+          name="sound-volume" min="0" max="100" step="2"></div>
+      <div class="sound"><img src="" alt="traffic in distance" class="sound-img"><input id="highway-range" type="range"
+          name="sound-volume" min="0" max="100" step="2"></div>
     </div>
-    <!-- master volume -->
-    <div id="master-volume-container">
+    <!-- TODO master volume -->
+    <!-- <div id="master-volume-container">
       <label for="master-volume">Master volume</label>
       <input type="range" name="master-volume" min="0" max="100" sstep="2">
     </div>
-  </div>
+  </div> -->
 
-  <div id="footer">
+    <div id="footer">
 
-  </div>
-  <audio name="highway-sounds" id="highway-audio">
-    <source src="https://www.soundjay.com/transportation/sounds/highway-1.mp3" type="audio/x-wav" />
-  </audio>
-  <audio name="fire-sounds" id="fire-audio">
-    <source src="./media/highway-1.mp3" type="audio/mpeg" />
-  </audio>
-  <audio name="wave-sounds" id="wave-audio">
-    <source src="https://www.soundjay.com/nature/sounds/ocean-wave-1.mp3" type="audio/mpeg" />
-  </audio>
+    </div>
+    <audio name="highway-sounds" id="highway-audio">
+      <source src="https://www.soundjay.com/transportation/sounds/highway-1.mp3" type="audio/x-wav" />
+    </audio>
+    <audio name="fire-sounds" id="fire-audio">
+      <source src="./media/highway-1.mp3" type="audio/mpeg" />
+    </audio>
+    <audio name="wave-sounds" id="wave-audio">
+      <source src="https://www.soundjay.com/nature/sounds/ocean-wave-1.mp3" type="audio/mpeg" />
+    </audio>
 
-  <script>
-    // create a class of sound objects (in order to simulate a web app environment)
-    class Sound {
-      constructor(name, soundSrc, imgSrc) {
-        this.name = name;
-        this.soundSrc = soundSrc;
-        this.imgSrc = imgSrc;
+    <script>
+      // declare an object for each sound
+      // attributes include volume level (default 1/2), reference to audio element
+      let soundsObject = {
+        highway: {
+          volume: 50,
+          audioElement: document.getElementById("highway-audio"),
+          rangeElement: document.getElementById("highway-range")
+        },
+        fire: {
+          volume: 50,
+          audioElement: document.getElementById("fire-audio"),
+          rangeElement: document.getElementById("fire-range")
+        },
+        waves: {
+          volume: 50,
+          audioElement: document.getElementById("wave-audio"),
+          rangeElement: document.getElementById("waves-range")
+        }
+      };
+
+      for (const [key, currentSoundObject] of Object.entries(soundsObject)) {
+        let currentRange = currentSoundObject.rangeElement;
+        let currentAudio = currentSoundObject.audioElement;
+        if (currentRange.addEventListener) {
+          currentRange.addEventListener("onChange", function () {
+            const newVolumeLevel = this.value; // get the new value
+            currentAudio.volume(newVolumeLevel); // set the value of the current audio source volume to the new value
+          });
+        }
       }
 
-      toString() {
-        return `${this.name} sound retrieved from ${this.soundSrc}`;
+      const audioContext = new AudioContext();
+
+      // reference to play/pause button
+      const playButton = document.getElementById("play-pause");
+      if (playButton.addEventListener) {
+        playButton.addEventListener('click', function () {
+          for (const [key, currentSoundObject] of Object.entries(soundsObject)) {
+            currentSoundObject.audioElement.play();
+          }
+        }, false);
       }
-    }
-
-    // list of contrived sound objects, as if from a server
-    const soundData = [
-      new Sound("fire", "https://www.soundjay.com/nature/sounds/campfire-1.mp3", ""),
-      new Sound("highway", "https://www.soundjay.com/transportation/sounds/highway-1.mp3", ""),
-      new Sound("wave", "https://www.soundjay.com/nature/sounds/ocean-wave-1.mp3", "")
-    ];
-
-    // declare an object for each sound
-    // attributes include volume level (default 1/2), reference to audio element
-    let soundsObject = {
-      highway: {
-        volume: 50,
-        audioElement: document.getElementById("highway-audio")
-      },
-      fire: {
-        volume: 50,
-        audioElement: document.getElementById("fire-audio")
-      },
-      waves: {
-        volume: 50,
-        audioElement: document.getElementById("wave-audio")
-      }
-    };
-
-    // retrieve all  sound-containers
-    const soundContainers = document.querySelectorAll(".sound");
-    // console.log("sound contaners" + [...soundContainers]);
-    // for (let z of Object.entries(soundContainers)) {
-    //   console.log(z);
-    // }
-
-    // make a object, this time pairing sound-container objects with sounds
-
-    // for each entry in the sounds/elements object:
-    //    1. hook up the range to the audio
-    //    2. set the label to be the name of the sound
-    //    3. if there is an image, apply this
-
-    // function that decreases volume for all 
-    // reference for master volume
-
-
-    const audioContext = new AudioContext();
-
-
-    // reference to play/pause button
-    const playButton = document.getElementById("play-pause");
-    playButton.addEventListener('click', function () {
-      for (let sound of Object.entries(sounds)) {
-        sound.audioElement.play();
-      }
-    }, false);
-
-  </script>
+    </script>
 </body>
 
 </html>

@@ -1,3 +1,34 @@
 <!-- Learning emmett!!! -->
 
 (div.sound>img.sound-img+input[type="range" name="sound-volume" min="0" max="100" step="2"])*3
+
+<!-- js for the sound class -->
+// create a class of sound objects (in order to simulate a web app environment)
+class Sound {
+constructor(name, soundSrc, imgSrc) {
+this.name = name;
+this.soundSrc = soundSrc;
+this.imgSrc = imgSrc;
+}
+
+toString() {
+return `${this.name} sound retrieved from ${this.soundSrc}`;
+}
+}
+
+// list of contrived sound objects, as if from a server
+const soundData = [
+new Sound("fire", "https://www.soundjay.com/nature/sounds/campfire-1.mp3", ""),
+new Sound("highway", "https://www.soundjay.com/transportation/sounds/highway-1.mp3", ""),
+new Sound("wave", "https://www.soundjay.com/nature/sounds/ocean-wave-1.mp3", "")
+];
+
+// retrieve all sound-containers
+const soundContainers = document.querySelectorAll(".sound");
+
+// make a object, this time pairing sound-container objects with sounds
+
+// for each entry in the sounds/elements object:
+// 1. hook up the range to the audio
+// 2. set the label to be the name of the sound
+// 3. if there is an image, apply this
