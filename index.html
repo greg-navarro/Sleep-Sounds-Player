@@ -72,14 +72,21 @@
         }
       };
 
+      const maxVolumeLevel = 100;
       for (const [key, currentSoundObject] of Object.entries(soundsObject)) {
         let currentRange = currentSoundObject.rangeElement;
         let currentAudio = currentSoundObject.audioElement;
+        console.log(currentRange)
         if (currentRange.addEventListener) {
-          currentRange.addEventListener("onChange", function () {
+          console.log("adding event listener")
+          currentRange.addEventListener("change", function () {
+            // console.log("click")
+            console.log(`current ${key} volume: ${this.value}`);
             const newVolumeLevel = this.value; // get the new value
-            currentAudio.volume(newVolumeLevel); // set the value of the current audio source volume to the new value
-          });
+            currentAudio.volume = newVolumeLevel / maxVolumeLevel; // set the value of the current audio source volume to the new value
+          }, false);
+        } else {
+          console.log("cocksucker")
         }
       }
 
