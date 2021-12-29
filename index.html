@@ -14,11 +14,13 @@
   </div>
 
   <div id="content">
+    <!-- play button -->
     <div id="play-container">
       <button name="play-pause" type="button">
         PLAY/PAUSE TODO: ADD IMAGES!!!
       </button>
     </div>
+    <!-- sound ranges -->
     <div id="sounds-container">
       <div class="sound">
         <img src="" alt="waves on beach" class="sound-img"><input type="range" name="sound-volume" min="0" max="100"
@@ -29,6 +31,7 @@
       <div class="sound"><img src="" alt="traffic in distance" class="sound-img"><input type="range" name="sound-volume"
           min="0" max="100" step="2"></div>
     </div>
+    <!-- master volume -->
     <div id="master-volume-container">
       <label for="master-volume">Master volume</label>
       <input type="range" name="master-volume" min="0" max="100" sstep="2">
@@ -49,9 +52,29 @@
   </audio>
 
   <script>
+    // create a class of sound objects (in order to simulate a web app environment)
+    class Sound {
+      constructor(name, soundSrc, imgSrc) {
+        this.name = name;
+        this.soundSrc = soundSrc;
+        this.imgSrc = imgSrc;
+      }
+
+      toString() {
+        return `${this.name} sound retrieved from ${this.soundSrc}`;
+      }
+    }
+
+    // list of contrived sound objects, as if from a server
+    const soundData = [
+      new Sound("fire", "https://www.soundjay.com/nature/sounds/campfire-1.mp3", ""),
+      new Sound("highway", "https://www.soundjay.com/transportation/sounds/highway-1.mp3", ""),
+      new Sound("wave", "https://www.soundjay.com/nature/sounds/ocean-wave-1.mp3", "")
+    ];
+
     // declare an object for each sound
-    // attributes include volume level (default 1/4), reference to audio element
-    let sounds = {
+    // attributes include volume level (default 1/2), reference to audio element
+    let soundsObject = {
       highway: {
         volume: 50,
         audioElement: document.getElementById("highway-audio")
@@ -64,7 +87,24 @@
         volume: 50,
         audioElement: document.getElementById("wave-audio")
       }
-    }
+    };
+
+    // retrieve all  sound-containers
+    const soundContainers = document.querySelectorAll(".sound");
+    // console.log("sound contaners" + [...soundContainers]);
+    // for (let z of Object.entries(soundContainers)) {
+    //   console.log(z);
+    // }
+
+    // make a object, this time pairing sound-container objects with sounds
+
+    // for each entry in the sounds/elements object:
+    //    1. hook up the range to the audio
+    //    2. set the label to be the name of the sound
+    //    3. if there is an image, apply this
+
+    // function that decreases volume for all 
+    // reference for master volume
 
 
     const audioContext = new AudioContext();
@@ -73,13 +113,11 @@
     // reference to play/pause button
     const playButton = document.getElementById("play-pause");
     playButton.addEventListener('click', function () {
-
+      for (let sound of Object.entries(sounds)) {
+        sound.audioElement.play();
+      }
     }, false);
-    // collect references to all audio sources in object
-    // for each range, hook it up to its audio volume control
 
-    // function that decreases volume for all 
-    // reference for master volume
   </script>
 </body>
 
