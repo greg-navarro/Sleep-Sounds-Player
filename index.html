@@ -33,78 +33,102 @@
           name="sound-volume" min="0" max="100" step="2"></div>
     </div>
     <!-- TODO master volume -->
-    <!-- <div id="master-volume-container">
+    <div id="master-volume-container">
       <label for="master-volume">Master volume</label>
-      <input type="range" name="master-volume" min="0" max="100" sstep="2">
+      <input type="range" name="master-volume" id="master-volume" min="0" max="100" step="2">
     </div>
-  </div> -->
+  </div>
 
-    <div id="footer">
+  <div id="footer">
 
-    </div>
-    <audio name="highway-sounds" id="highway-audio">
-      <source src="https://www.soundjay.com/transportation/sounds/highway-1.mp3" type="audio/x-wav" />
-    </audio>
-    <audio name="fire-sounds" id="fire-audio">
-      <source src="./media/highway-1.mp3" type="audio/mpeg" />
-    </audio>
-    <audio name="wave-sounds" id="wave-audio">
-      <source src="https://www.soundjay.com/nature/sounds/ocean-wave-1.mp3" type="audio/mpeg" />
-    </audio>
+  </div>
+  <audio name="highway-sounds" id="highway-audio">
+    <source src="https://www.soundjay.com/transportation/sounds/highway-1.mp3" type="audio/x-wav" />
+  </audio>
+  <audio name="fire-sounds" id="fire-audio">
+    <source src="./media/highway-1.mp3" type="audio/mpeg" />
+  </audio>
+  <audio name="wave-sounds" id="wave-audio">
+    <source src="https://www.soundjay.com/nature/sounds/ocean-wave-1.mp3" type="audio/mpeg" />
+  </audio>
 
-    <script>
-      // declare an object for each sound
-      // attributes include volume level (default 1/2), reference to audio element
-      let soundsObject = {
-        highway: {
-          volume: 50,
-          audioElement: document.getElementById("highway-audio"),
-          rangeElement: document.getElementById("highway-range")
-        },
-        fire: {
-          volume: 50,
-          audioElement: document.getElementById("fire-audio"),
-          rangeElement: document.getElementById("fire-range")
-        },
-        waves: {
-          volume: 50,
-          audioElement: document.getElementById("wave-audio"),
-          rangeElement: document.getElementById("waves-range")
-        }
-      };
-
-      const maxVolumeLevel = 100;
-      for (const [key, currentSoundObject] of Object.entries(soundsObject)) {
-        let currentRange = currentSoundObject.rangeElement;
-        let currentAudio = currentSoundObject.audioElement;
-        // have each audio element play on a loop
-        currentAudio.loop = true;
-        // add event listener to each range that for adjusting each audio input
-        if (currentRange.addEventListener) {
-          currentRange.addEventListener("change", function () {
-            const newVolumeLevel = this.value / maxVolumeLevel; // get the new volume, between 0 and 1.0 inclusive
-            currentAudio.volume = newVolumeLevel; // set the value of the current audio source volume to the new value
-          }, false);
-        } else {
-          console.log("Could not add event listeners to volume range inputs");
-        }
+  <script>
+    // declare an object for each sound
+    // attributes include volume level (default 1/2), reference to audio element
+    let soundsObject = {
+      highway: {
+        volume: 50,
+        audioElement: document.getElementById("highway-audio"),
+        rangeElement: document.getElementById("highway-range")
+      },
+      fire: {
+        volume: 50,
+        audioElement: document.getElementById("fire-audio"),
+        rangeElement: document.getElementById("fire-range")
+      },
+      waves: {
+        volume: 50,
+        audioElement: document.getElementById("wave-audio"),
+        rangeElement: document.getElementById("waves-range")
       }
+    };
 
-      // reference to play/pause button
-      let playing = false;
-      const playButton = document.getElementById("play-pause");
-      if (playButton.addEventListener) {
-        playButton.addEventListener('click', function () {
-          for (const [key, currentSoundObject] of Object.entries(soundsObject)) {
-            if (!playing)
-              currentSoundObject.audioElement.play();
-            else
-              currentSoundObject.audioElement.pause();
-          }
-          playing = !playing;
+    const maxVolumeLevel = 100;
+    let currentMasterVolume = 50;
+    for (const [key, currentSoundObject] of Object.entries(soundsObject)) {
+      let currentRange = currentSoundObject.rangeElement;
+      let currentAudio = currentSoundObject.audioElement;
+      // have each audio element play on a loop
+      currentAudio.loop = true;
+      // add event listener to each range that for adjusting each audio input
+      if (currentRange.addEventListener) {
+        currentRange.addEventListener("change", function () {
+          const newVolumeLevel = (this.value / maxVolumeLevel) * (currentMasterVolume * maxVolumeLevel); // get the new volume, between 0 and 1.0 inclusive
+          currentAudio.volume = newVolumeLevel; // set the value of the current audio source volume to the new value
         }, false);
+      } else {
+        console.log("Could not add event listeners to volume range inputs");
       }
-    </script>
+    }
+
+    // adds functionality to play/pause button
+    let playing = false;
+    const playButton = document.getElementById("play-pause");
+    if (playButton.addEventListener) {
+      playButton.addEventListener('click', function () {
+        for (const [key, currentSoundObject] of Object.entries(soundsObject)) {
+          if (!playing)
+            currentSoundObject.audioElement.play();
+          else
+            currentSoundObject.audioElement.pause();
+        }
+        playing = !playing;
+      }, false);
+    }
+
+    // adds functionality to master volume range
+    const masterVolume = document.getElementById("master-volume");
+    currentMasterVolume = masterVolume.value;
+    if (masterVolume.addEventListener) {
+      masterVolume.addEventListener("change", function () {
+        const newVolume = masterVolume.value;
+        const masterVolumeDelta = (currentMasterVolume - newVolume) / maxVolumeLevel;
+
+        // go through each audio reference and adjust it's audio
+        for (const [key, currentSoundObject] of Object.entries(soundsObject)) {
+          let currentAudio = currentSoundObject.audioElement;
+          let currentVolume = currentAudio.volume;
+          if (currentVolume + masterVolumeDelta < 0) {
+            currentAudio.volume = 0;
+          } else if (currentVolume + masterVolumeDelta > 1.0) {
+            currentAudio.volume = 1.0;
+          } else {
+            currentAudio.volume = currentVolume + masterVolumeDelta;
+          }
+        }
+      })
+    }
+  </script>
 </body>
 
 </html>
