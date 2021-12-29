@@ -83,7 +83,7 @@
       // add event listener to each range that for adjusting each audio input
       if (currentRange.addEventListener) {
         currentRange.addEventListener("change", function () {
-          const newVolumeLevel = (this.value / maxVolumeLevel) * (currentMasterVolume * maxVolumeLevel); // get the new volume, between 0 and 1.0 inclusive
+          const newVolumeLevel = (this.value / maxVolumeLevel) * (currentMasterVolume / maxVolumeLevel); // get the new volume, between 0 and 1.0 inclusive
           currentAudio.volume = newVolumeLevel; // set the value of the current audio source volume to the new value
         }, false);
       } else {
@@ -111,20 +111,12 @@
     currentMasterVolume = masterVolume.value;
     if (masterVolume.addEventListener) {
       masterVolume.addEventListener("change", function () {
-        const newVolume = masterVolume.value;
-        const masterVolumeDelta = (currentMasterVolume - newVolume) / maxVolumeLevel;
-
+        currentMasterVolume = masterVolume.value;
         // go through each audio reference and adjust it's audio
         for (const [key, currentSoundObject] of Object.entries(soundsObject)) {
+          let currentRange = currentSoundObject.rangeElement;
           let currentAudio = currentSoundObject.audioElement;
-          let currentVolume = currentAudio.volume;
-          if (currentVolume + masterVolumeDelta < 0) {
-            currentAudio.volume = 0;
-          } else if (currentVolume + masterVolumeDelta > 1.0) {
-            currentAudio.volume = 1.0;
-          } else {
-            currentAudio.volume = currentVolume + masterVolumeDelta;
-          }
+          currentAudio.volume = (currentRange.value / maxVolumeLevel) * (masterVolume.value / maxVolumeLevel);
         }
       })
     }
