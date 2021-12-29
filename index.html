@@ -83,15 +83,18 @@
         }
       }
 
-      const audioContext = new AudioContext();
-
       // reference to play/pause button
+      let playing = false;
       const playButton = document.getElementById("play-pause");
       if (playButton.addEventListener) {
         playButton.addEventListener('click', function () {
           for (const [key, currentSoundObject] of Object.entries(soundsObject)) {
-            currentSoundObject.audioElement.play();
+            if (!playing)
+              currentSoundObject.audioElement.play();
+            else
+              currentSoundObject.audioElement.pause();
           }
+          playing = !playing;
         }, false);
       }
     </script>
