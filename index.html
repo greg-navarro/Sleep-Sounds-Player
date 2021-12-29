@@ -76,17 +76,16 @@
       for (const [key, currentSoundObject] of Object.entries(soundsObject)) {
         let currentRange = currentSoundObject.rangeElement;
         let currentAudio = currentSoundObject.audioElement;
-        console.log(currentRange)
+        // have each audio element play on a loop
+        currentAudio.loop = true;
+        // add event listener to each range that for adjusting each audio input
         if (currentRange.addEventListener) {
-          console.log("adding event listener")
           currentRange.addEventListener("change", function () {
-            // console.log("click")
-            console.log(`current ${key} volume: ${this.value}`);
-            const newVolumeLevel = this.value; // get the new value
-            currentAudio.volume = newVolumeLevel / maxVolumeLevel; // set the value of the current audio source volume to the new value
+            const newVolumeLevel = this.value / maxVolumeLevel; // get the new volume, between 0 and 1.0 inclusive
+            currentAudio.volume = newVolumeLevel; // set the value of the current audio source volume to the new value
           }, false);
         } else {
-          console.log("cocksucker")
+          console.log("Could not add event listeners to volume range inputs");
         }
       }
 
