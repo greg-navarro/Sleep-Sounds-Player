@@ -19,7 +19,7 @@ let currentMasterVolume = masterVolume.value;
 const outerSoundsContainer = document.querySelector("#sounds-container");
 
 // populate outer container with sound objects
-initializeSounds(soundData, outerSoundsContainer);
+initializeSounds(soundData, outerSoundsContainer, masterVolume);
 
 
 
@@ -33,21 +33,24 @@ function setAttributes(element, attributes) {
 }
 
 // Creates an individual sound/range slider element.
-function createSoundsElement(soundObject) {
+function createSoundsElement(soundObject, masterVolumeControl) {
   // constants
   const MIN = 0;
   const MAX = 100;
   const STEP = 2;
-  // generate audio element
+
+  // generate html audio element with provided source
   let audioElement = document.createElement("audio");
   let audioSourceElement = document.createElement("source");
   setAttributes(audioSourceElement, {
-    src: "https://www.soundjay.com/nature/sounds/ocean-wave-1.mp3",
+    src: "https://www.soundjay.com/nature/sounds/ocean-wave-1.mp3", // TODO get audio source from the soundObject
     type: "audio/mpeg"
   });
-  audioElement.append(audioSourceElement);
-  // generate the HTML for a sound volume slider
-  let soundContainer = document.createElement("div"); //.classList.add("sounds-container")
+  audioElement.loop = true; // play audio file on repeat
+  audioElement.append(audioSourceElement); // add source to html audio element
+
+  // generate the HTML for a range slider controlling audio sources volume
+  let soundContainer = document.createElement("div"); // TODO .classList.add("sounds-container")
   let soundImage = document.createElement("img");
   setAttributes(soundImage, {
     src: "",
@@ -61,17 +64,21 @@ function createSoundsElement(soundObject) {
     max: MAX.toString(),
     step: STEP.toString()
   });
-  // TODO add event handler to the range
-  rangeInput
+  // add event handler to the range
+  let currentMasterVolumeLevel = masterVolumeControl.value;
+  rangeInput.addEventListener("change", function () {
+    const newVolumeLevel = (this.value / MAX) * (currentMasterVolumeLevel / MAX); // get the new volume, between 0 and 1.0 inclusive
+    audioElement.volume = newVolumeLevel; // set the value of the current audio source volume to the new value
+  }, false);
   // assemble sound slider html
   soundContainer.append(audioElement, soundImage, rangeInput);
   return soundContainer;
 }
 
 // Given an array of Sound objects, create a list of HTML elements and insert them into the provided node.
-function initializeSounds(soundsObjects, outerSoundsContainer) {
+function initializeSounds(soundsObjects, outerSoundsContainer, masterVolumeControl) {
   // create sound html elements and add them to the document
   for (const soundObject of soundsObjects) {
-    outerSoundsContainer.append(createSoundsElement(soundObject));
+    outerSoundsContainer.append(createSoundsElement(soundObject, masterVolumeControl));
   }
 }
