@@ -32,6 +32,22 @@ if (masterVolume.addEventListener) {
   })
 }
 
+// hook up the play/pause button to the audio elements
+// reference to play/pause button
+let playing = false;
+const playButton = document.querySelector("#play-pause");
+if (playButton.addEventListener) {
+  playButton.addEventListener('click', function () {
+    for (const [currentRange, currentAudio] of AUDIORANGES) {
+      if (!playing)
+        currentAudio.play();
+      else
+        currentAudio.pause();
+    }
+    playing = !playing;
+  }, false);
+}
+
 /* Functions */
 // Set multiple html attributes at once w/ object literal syntax.
 // element is the HTML whose attributes we are setting,
