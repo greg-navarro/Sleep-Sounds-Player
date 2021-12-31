@@ -21,10 +21,7 @@
       </button>
     </div>
     <!-- sound ranges -->
-    <!-- TODO ADD IMAGES!!! -->
-    <div id="sounds-container">
-
-    </div>
+    <div id="sounds-container"></div>
     <!-- TODO master volume -->
     <div id="master-volume-container">
       <label for="master-volume">Master volume</label>
@@ -32,80 +29,8 @@
     </div>
   </div>
 
-  <div id="footer">
-
-  </div>
-
-
-  <script>
-    // declare an object for each sound
-    // attributes include volume level (default 1/2), reference to audio element
-    let soundsObject = {
-      highway: {
-        volume: 50,
-        audioElement: document.getElementById("highway-audio"),
-        rangeElement: document.getElementById("highway-range")
-      },
-      fire: {
-        volume: 50,
-        audioElement: document.getElementById("fire-audio"),
-        rangeElement: document.getElementById("fire-range")
-      },
-      waves: {
-        volume: 50,
-        audioElement: document.getElementById("wave-audio"),
-        rangeElement: document.getElementById("waves-range")
-      }
-    };
-
-    const maxVolumeLevel = 100;
-    let currentMasterVolume = 50;
-    for (const [key, currentSoundObject] of Object.entries(soundsObject)) {
-      let currentRange = currentSoundObject.rangeElement;
-      let currentAudio = currentSoundObject.audioElement;
-      // have each audio element play on a loop
-      currentAudio.loop = true;
-      // add event listener to each range that for adjusting each audio input
-      if (currentRange.addEventListener) {
-        currentRange.addEventListener("change", function () {
-          const newVolumeLevel = (this.value / maxVolumeLevel) * (currentMasterVolume / maxVolumeLevel); // get the new volume, between 0 and 1.0 inclusive
-          currentAudio.volume = newVolumeLevel; // set the value of the current audio source volume to the new value
-        }, false);
-      } else {
-        console.log("Could not add event listeners to volume range inputs");
-      }
-    }
-
-    // adds functionality to play/pause button
-    let playing = false;
-    const playButton = document.getElementById("play-pause");
-    if (playButton.addEventListener) {
-      playButton.addEventListener('click', function () {
-        for (const [key, currentSoundObject] of Object.entries(soundsObject)) {
-          if (!playing)
-            currentSoundObject.audioElement.play();
-          else
-            currentSoundObject.audioElement.pause();
-        }
-        playing = !playing;
-      }, false);
-    }
-
-    // adds functionality to master volume range
-    const masterVolume = document.getElementById("master-volume");
-    currentMasterVolume = masterVolume.value;
-    if (masterVolume.addEventListener) {
-      masterVolume.addEventListener("change", function () {
-        currentMasterVolume = masterVolume.value;
-        // go through each audio reference and adjust it's audio
-        for (const [key, currentSoundObject] of Object.entries(soundsObject)) {
-          let currentRange = currentSoundObject.rangeElement;
-          let currentAudio = currentSoundObject.audioElement;
-          currentAudio.volume = (currentRange.value / maxVolumeLevel) * (masterVolume.value / maxVolumeLevel);
-        }
-      })
-    }
-  </script>
+  <div id="footer"></div>
+  <script src="script.js" type="module"></script>
 </body>
 
 </html>

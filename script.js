@@ -38,7 +38,7 @@ if (masterVolume.addEventListener) {
 // attributes is an object storing mappings of attributes & values. 
 function setAttributes(element, attributes) {
   for (let [attribute, value] of Object.entries(attributes)) {
-    element.setAttributes(attribute, value);
+    element.setAttribute(attribute, value);
   }
 }
 
