@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 
-export default function SoundSource(name = "", src = "", img = "") {
+export default function SoundSource({ name = "", src = "", img = "" }) {
   // constants
   const MIN = 0;
   const MAX = 100;
@@ -23,7 +23,15 @@ export default function SoundSource(name = "", src = "", img = "") {
     <div>
       <audio ref={audioSrc} src={src} />
       <img src={img} alt={name}></img>
-      <input ref={volumeControl} type="range" name="soundSourceVolume" id="" min={MIN.toString()} max={MAX.toString()} step={STEP.toString()}></input>
+      <input
+        ref={volumeControl}
+        type="range"
+        name="soundSourceVolume"
+        id=""
+        min={MIN.toString()}
+        max={MAX.toString()}
+        step={STEP.toString()}
+      ></input>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import soundData from './data/sounds-data.json';
 function App() {
   return (
     <div className="App">
-      <Player data={soundData} />
+      <Player data={[...soundData]} />
     </div>
   );
 }

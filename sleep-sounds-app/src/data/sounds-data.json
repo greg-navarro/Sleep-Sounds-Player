@@ -2,16 +2,16 @@
   {
     "name": "fire",
     "src": "https://www.soundjay.com/nature/sounds/campfire-1.mp3",
-    "image-src": ""
+    "imgSrc": ""
   },
   {
     "name": "highway",
     "src": "https://www.soundjay.com/transportation/sounds/highway-1.mp3",
-    "image-src": ""
+    "imgSrc": ""
   },
   {
     "name": "wave",
     "src": "https://www.soundjay.com/nature/sounds/ocean-wave-1.mp3",
-    "image-src": ""
+    "imgSrc": ""
   }
 ]
