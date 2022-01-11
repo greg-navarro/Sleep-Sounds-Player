@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import SoundSourceList from './SoundSourceList';
 
 export default function Player({ data = [] }) {
-
+  const maxVolumeLevel = 100;
   const [playing, setPlaying] = useState(false);
+  const [masterVolumeLevel, setMasterVolumeLevel] = useState(maxVolumeLevel / 2);
 
   const play = () => {
     const audioElements = document.querySelectorAll(".audio-element");
@@ -17,6 +18,12 @@ export default function Player({ data = [] }) {
     setPlaying(!playing);
   };
 
+  const adjustMasterVolume = (e) => {
+    console.log("old: " + masterVolumeLevel);
+    setMasterVolumeLevel(e.target.value / maxVolumeLevel);
+    const newValue = masterVolumeLevel;
+    console.log("new: " + newValue);
+  };
 
   return (
     <>
@@ -32,7 +39,15 @@ export default function Player({ data = [] }) {
       {/* master volume */}
       <div id="master-volume-container">
         <label for="master-volume">Master volume</label>
-        <input type="range" name="master-volume" id="master-volume" min="0" max="100" step="2">
+        <input
+          type="range"
+          name="master-volume"
+          id="master-volume"
+          min="0"
+          max="100"
+          step="2"
+          onChange={(e) => { adjustMasterVolume(e); }}
+        >
         </input>
       </div>
     </>
