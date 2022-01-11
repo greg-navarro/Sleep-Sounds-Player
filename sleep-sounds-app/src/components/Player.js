@@ -2,20 +2,28 @@ import React, { useState } from 'react';
 import SoundSourceList from './SoundSourceList';
 
 export default function Player({ data = [] }) {
-  // let playing = false;
-  // const playSound = () => {
-
-  //   playing = !playing;
-  // };
 
   const [playing, setPlaying] = useState(false);
+
+  const play = () => {
+    const audioElements = document.querySelectorAll(".audio-element");
+    for (const audioElement of audioElements) {
+      if (playing) {
+        audioElement.play();
+      } else {
+        audioElement.pause();
+      }
+    }
+    setPlaying(!playing);
+  };
+
 
   return (
     <>
       <h1>Sleep Sounds Player</h1>
       {/* play button */}
       <div id="play-container">
-        <button name="play-pause" type="button" id="play-pause" onClick={() => console.log("oh no mr bill")}>
+        <button name="play-pause" type="button" id="play-pause" onClick={() => play()}>
           PLAY/PAUSE
         </button>
       </div>

@@ -21,7 +21,7 @@ export default function SoundSource({ name = "", src = "", img = "" }) {
 
   return (
     <div>
-      <audio ref={audioSrc} src={src} />
+      <audio ref={audioSrc} src={src} className="audio-element" />
       <img src={img} alt={name}></img>
       <input
         ref={volumeControl}
