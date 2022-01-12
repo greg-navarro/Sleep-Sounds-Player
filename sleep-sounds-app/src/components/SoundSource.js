@@ -40,7 +40,7 @@ export default function SoundSource({
   // Construct the element
   return (
     <div>
-      <audio ref={audioSrc} src={src} className="audio-element" id={audioID} />
+      <audio ref={audioSrc} src={src} className="audio-element" id={audioID} loop />
       <img src={img} alt={name}></img>
       <input
         ref={volumeControl}
