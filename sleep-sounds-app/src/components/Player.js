@@ -18,11 +18,11 @@ export default function Player({ data = [] }) {
     setPlaying(!playing);
   };
 
-  const adjustMasterVolume = (e) => {
-    console.log("old: " + masterVolumeLevel);
+  const adjustMasterVolume = (e) => { // TODO implement master volume
+    // console.log("old: " + masterVolumeLevel);
     setMasterVolumeLevel(e.target.value / maxVolumeLevel);
-    const newValue = masterVolumeLevel;
-    console.log("new: " + newValue);
+    // const newValue = masterVolumeLevel;
+    // console.log("new: " + newValue);
   };
 
   return (
@@ -38,7 +38,7 @@ export default function Player({ data = [] }) {
       <SoundSourceList soundList={data} />
       {/* master volume */}
       <div id="master-volume-container">
-        <label for="master-volume">Master volume</label>
+        <label htmlFor="master-volume">Master volume</label>
         <input
           type="range"
           name="master-volume"

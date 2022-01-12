@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 
-export default function SoundSource({ name = "", src = "", img = "" }) {
+export default function SoundSource({ name = "", src = "", img = "", getMasterVolume = f => f }) {
   // constants
   const MIN = 0;
   const MAX = 100;
@@ -14,9 +14,14 @@ export default function SoundSource({ name = "", src = "", img = "" }) {
   const volumeControl = useRef();
 
   // event handler for volume changes
-  const adjustVolume = () => {
+  const adjustVolume = (e) => {
+    // TODO adjust volume of track based ONLY on the current range value
     // get new volume level
-    // set audio to new level  
+    const newVolumeLevel = e.target.value / MAX;
+    // console.log(e);
+    // set audio to new level
+    audioSrc.current.volume = newVolumeLevel;
+    console.log(`new volume level for ${name} is ${newVolumeLevel}`);
   };
 
   return (
@@ -31,6 +36,7 @@ export default function SoundSource({ name = "", src = "", img = "" }) {
         min={MIN.toString()}
         max={MAX.toString()}
         step={STEP.toString()}
+        onChange={(e) => adjustVolume(e)}
       ></input>
     </div>
   );
