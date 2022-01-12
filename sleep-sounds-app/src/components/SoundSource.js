@@ -1,13 +1,14 @@
 import React, { useRef } from "react";
 
-export default function SoundSource({ name = "", src = "", img = "", getMasterVolume = f => f }) {
+export default function SoundSource({ name = "", src = "", img = "", min = 0, max = 100, step = 2, getMasterVolume = f => f }) {
   // constants
-  const MIN = 0;
-  const MAX = 100;
-  const STEP = 2;
+  const MIN = min;
+  const MAX = max;
+  const STEP = step;
 
   // current volme level
   let volumeLevel = MAX / 2;
+  let currentMasterVolume = getMasterVolume();
 
   // declare refs
   const audioSrc = useRef();
@@ -17,7 +18,7 @@ export default function SoundSource({ name = "", src = "", img = "", getMasterVo
   const adjustVolume = (e) => {
     // TODO adjust volume of track based ONLY on the current range value
     // get new volume level
-    const newVolumeLevel = e.target.value / MAX;
+    const newVolumeLevel = e.target.value / MAX * currentMasterVolume;
     // console.log(e);
     // set audio to new level
     audioSrc.current.volume = newVolumeLevel;

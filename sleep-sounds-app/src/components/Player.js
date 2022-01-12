@@ -25,6 +25,8 @@ export default function Player({ data = [] }) {
     // console.log("new: " + newValue);
   };
 
+  const getMasterVolume = () => (masterVolumeLevel / maxVolumeLevel);
+
   return (
     <>
       <h1>Sleep Sounds Player</h1>
