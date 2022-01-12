@@ -1,13 +1,20 @@
 import React, { useRef } from "react";
 
-export default function SoundSource({ name = "", src = "", img = "", min = 0, max = 100, step = 2, getMasterVolume = f => f, id = "" }) {
+export default function SoundSource({
+  name = "",
+  src = "",
+  img = "",
+  min = 0,
+  max = 100,
+  step = 2,
+  getMasterVolume = f => f,
+  id = "" }) {
   // constants
   const MIN = min;
   const MAX = max;
   const STEP = step;
 
   // current volme level
-  let volumeLevel = MAX / 2;
   let currentMasterVolume = getMasterVolume();
 
   // set id's for audio element and range
@@ -30,7 +37,7 @@ export default function SoundSource({ name = "", src = "", img = "", min = 0, ma
     audioSrc.current.volume = newVolumeLevel;
     console.log(`new volume level for ${name} is ${newVolumeLevel}`);
   };
-
+  // Construct the element
   return (
     <div>
       <audio ref={audioSrc} src={src} className="audio-element" id={audioID} />

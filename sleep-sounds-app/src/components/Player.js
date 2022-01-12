@@ -52,13 +52,13 @@ export default function Player({ data = [] }) {
       const rangeElement = document.querySelector(rangeID);
 
       const newVolumeLevel = (rangeElement.value / maxVolumeLevel) * (e.target.value / maxVolumeLevel);
-      // console.log(`(${rangeElement.value} / ${maxVolumeLevel}) * ${e.target.value / maxVolumeLevel} = ${newVolumeLevel}`);
+      console.log(`(${rangeElement.value} / ${maxVolumeLevel}) * ${e.target.value / maxVolumeLevel} = ${newVolumeLevel}`);
       audioElement.volume = newVolumeLevel;
 
     }
   };
 
-  const getMasterVolume = () => (masterVolumeLevel / maxVolumeLevel);
+  const getMasterVolume = () => (masterVolumeLevel);
   // console.log(getMasterVolume());
 
   return (
