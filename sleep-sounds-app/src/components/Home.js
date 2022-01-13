@@ -15,18 +15,15 @@ export default function Home({ presents = [] }) {
 
   // filter list of all presents for those that resemble the search pattern
   const filterResults = () => {
-    console.log(query);
+    // console.log(query);
     const queryResults = fullPresents.filter((present) => present.name.includes(query));
-    console.log(queryResults);
+    // console.log(queryResults);
     setDisplayedPresents(queryResults);
   };
 
-  // // perform initial filtering TODO only if the search parameter is included
-  // filterResults();
-
   return (
     <div className="presents">
-      {/* TODO implement search bar */}
+      {/* search bar */}
       <div className="search-bar">
         <input
           value={query}
@@ -34,10 +31,9 @@ export default function Home({ presents = [] }) {
           name="present-query"
           placeholder="Search presents"
           onChange={event => {
-            console.log(event.target.value);
+            // console.log(event.target.value);
             setQuery(event.target.value);
-            console.log(query);
-            filterResults();
+            // console.log(query);
           }}
         />
         <button onClick={filterResults}>Search</button>
