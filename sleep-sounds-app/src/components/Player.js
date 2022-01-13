@@ -38,12 +38,9 @@ export default function Player({ data = [] }) {
     setPlaying(!playing);
   };
 
-  const adjustMasterVolume = (e) => { // TODO implement master volume
-    // console.log("old: " + masterVolumeLevel);
+  const adjustMasterVolume = (e) => {
+    // update state
     setMasterVolumeLevel(e.target.value / maxVolumeLevel);
-    // const newValue = masterVolumeLevel;
-    // console.log("new: " + newValue);
-
     // iterate thorugh sound sources, each has a range and audio source associated with it
     for (const soundSrc of soundSources) {
       const audioID = "#audio" + soundSrc.id.toString();
@@ -54,12 +51,10 @@ export default function Player({ data = [] }) {
       const newVolumeLevel = (rangeElement.value / maxVolumeLevel) * (e.target.value / maxVolumeLevel);
       console.log(`(${rangeElement.value} / ${maxVolumeLevel}) * ${e.target.value / maxVolumeLevel} = ${newVolumeLevel}`);
       audioElement.volume = newVolumeLevel;
-
     }
   };
 
   const getMasterVolume = () => (masterVolumeLevel);
-  // console.log(getMasterVolume());
 
   return (
     <>
