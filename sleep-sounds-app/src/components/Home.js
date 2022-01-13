@@ -15,7 +15,11 @@ export default function Home({ presents = [] }) {
 
   // filter list of all presents for those that resemble the search pattern
   const filterResults = () => {
-    const queryResults = presents.map((present) => present.name.includes(query));
+    // console.log(presents);
+    // console.log(query);
+    // console.log(presents[0].name.includes(query));
+    const queryResults = presents.filter((present) => present.name.includes(query));
+    console.log(queryResults);
     setDisplayedPresents(queryResults);
   };
 
