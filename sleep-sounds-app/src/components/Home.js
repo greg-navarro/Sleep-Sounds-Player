@@ -7,7 +7,7 @@ export default function Home({ presents = [] }) {
     id: v4(),
     name: "groovy beach sounds"
   });
-
+  const fullPresents = presents
   // add search query to state (controlled component)
   const [query, setQuery] = useState("");
   // add the presents currently showing to the state
@@ -15,10 +15,8 @@ export default function Home({ presents = [] }) {
 
   // filter list of all presents for those that resemble the search pattern
   const filterResults = () => {
-    // console.log(presents);
-    // console.log(query);
-    // console.log(presents[0].name.includes(query));
-    const queryResults = presents.filter((present) => present.name.includes(query));
+    console.log(query);
+    const queryResults = fullPresents.filter((present) => present.name.includes(query));
     console.log(queryResults);
     setDisplayedPresents(queryResults);
   };
@@ -29,8 +27,19 @@ export default function Home({ presents = [] }) {
   return (
     <div className="presents">
       {/* TODO implement search bar */}
-      <div>
-        <input value={query} type="text" name="present-query" placeholder="Search presents" onChange={event => setQuery(event.target.value)} />
+      <div className="search-bar">
+        <input
+          value={query}
+          type="text"
+          name="present-query"
+          placeholder="Search presents"
+          onChange={event => {
+            console.log(event.target.value);
+            setQuery(event.target.value);
+            console.log(query);
+            filterResults();
+          }}
+        />
         <button onClick={filterResults}>Search</button>
       </div>
       {/* TODO make each button a link that takes use to a detail page w/ id */}
@@ -39,6 +48,8 @@ export default function Home({ presents = [] }) {
           <p>{present.name}</p>
         </div>
       ))}
+      {/* TODO link to the custom player page */}
+      <button>Make custom player</button>
     </div>
   );
 }
