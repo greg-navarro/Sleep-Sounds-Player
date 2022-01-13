@@ -6,6 +6,8 @@ export function Navbar() {
     <div>
       <h1>Sleep Sounds Player</h1>
       <nav>
+        <Link to="/">Home</Link>
+        <Link to="/custom-player">Custom Player</Link>
         <Link to="/oldeplayer">Olde Player</Link>
       </nav>
     </div>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { v4 } from "uuid";
 
 export default function Home({ presents = [] }) {
@@ -45,7 +46,7 @@ export default function Home({ presents = [] }) {
         </div>
       ))}
       {/* TODO link to the custom player page */}
-      <button>Make custom player</button>
+      <button><Link to="custom-player" >Make custom player</Link></button>
     </div>
   );
 }
