@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { v4 } from "uuid";
 
 export default function Home({ data = {} }) {
   const presents = Object.keys(data).includes("presents") ? data.presents : [];
@@ -13,10 +12,7 @@ export default function Home({ data = {} }) {
     }
   }
   Object.assign(presents, testData);
-  // presents.push({
-  //   id: v4(),
-  //   name: "groovy beach sounds"
-  // });
+
   const fullPresents = presents;
   // add search query to state (controlled component)
   const [query, setQuery] = useState("");
@@ -25,9 +21,7 @@ export default function Home({ data = {} }) {
 
   // filter list of all presents for those that resemble the search pattern
   const filterResults = () => {
-    // console.log(query);
     const queryResults = Object.values(fullPresents).filter((present) => present.name.includes(query));
-    // console.log(queryResults);
     setDisplayedPresents(queryResults);
   };
 
@@ -41,9 +35,7 @@ export default function Home({ data = {} }) {
           name="present-query"
           placeholder="Search presents"
           onChange={event => {
-            // console.log(event.target.value);
             setQuery(event.target.value);
-            // console.log(query);
           }}
         />
         <button onClick={filterResults}>Search</button>
