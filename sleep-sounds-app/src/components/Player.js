@@ -63,13 +63,9 @@ export default function Player({ present = [], otherSounds = [] }) {
 
   // const [selectedOption, setSelectedOption] = useState(options[0].value);
   const addSoundSource = (sourceIndex) => {
-
     const sourceToAdd = otherSounds[sourceIndex];
-    console.log(soundSources);
     soundSources.push(sourceToAdd);
-    console.log(soundSources);
     updateSoundSources(soundSources);
-    console.log(soundSources);
   };
 
   return (
@@ -102,7 +98,10 @@ export default function Player({ present = [], otherSounds = [] }) {
         <select
           name="otherSounds"
           value="Sounds"
-          onChange={(e) => { addSoundSource(e.target.value); }}
+          onChange={(e) => {
+            e.preventDefault();
+            addSoundSource(e.target.value);
+          }}
         >
           <option value="Select a sound">Select a sound</option>
           {otherSounds.map((sound, i) =>
