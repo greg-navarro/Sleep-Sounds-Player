@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import SoundSourceList from './SoundSourceList';
 import { v4 } from "uuid";
 
-export default function Player({ data = [] }) {
-  // FIXME test data
-  const otherSounds = data;
-  console.group(data);
+export default function Player({ present = [], otherSoundss = [] }) {
+  // FIXME test present
+  const otherSounds = present;
+  console.group(present);
 
   const maxVolumeLevel = 100;
   const [playing, setPlaying] = useState(false);
@@ -13,7 +13,7 @@ export default function Player({ data = [] }) {
 
   // In order to manipulate the individual volume sources with the master volume control
   // we need to associate a unique id with each sound source.
-  const soundSources = data.map(sound => ({ ...sound, id: v4() }));
+  const soundSources = present.map(sound => ({ ...sound, id: v4() }));
 
   let justLoaded = true;
   const play = () => {
