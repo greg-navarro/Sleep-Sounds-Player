@@ -26,7 +26,7 @@ export default function Home({ data = {} }) {
   // filter list of all presents for those that resemble the search pattern
   const filterResults = () => {
     // console.log(query);
-    const queryResults = fullPresents.filter((present) => present.name.includes(query));
+    const queryResults = Object.values(fullPresents).filter((present) => present.name.includes(query));
     // console.log(queryResults);
     setDisplayedPresents(queryResults);
   };
