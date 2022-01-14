@@ -11,8 +11,8 @@ function App() {
     <div className="App">
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/oldeplayer" element={<Player present={[...soundData]} />} />
+        <Route path="/" element={<Home data={soundData} />} />
+        {/* <Route path="/oldeplayer" element={<Player present={[...soundData]} />} /> */}
         <Route path="/custom-player" element={<CustomPlayer />} />
       </Routes>
 
