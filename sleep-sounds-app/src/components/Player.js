@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import SoundSourceList from './SoundSourceList';
 import { v4 } from "uuid";
 
-export default function Player({ present = [], otherSoundss = [] }) {
-  // FIXME test present
-  const otherSounds = present;
+export default function Player({ present = [], otherSounds = [] }) {
+  // FIXME test othersounds and presents
+  otherSounds = otherSounds.length === 0 ? present : otherSounds;
   console.group(present);
 
   const maxVolumeLevel = 100;
