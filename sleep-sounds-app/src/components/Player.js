@@ -3,6 +3,10 @@ import SoundSourceList from './SoundSourceList';
 import { v4 } from "uuid";
 
 export default function Player({ data = [] }) {
+  // FIXME test data
+  const otherSounds = data;
+  console.group(data);
+
   const maxVolumeLevel = 100;
   const [playing, setPlaying] = useState(false);
   const [masterVolumeLevel, setMasterVolumeLevel] = useState(0.5);
@@ -58,7 +62,6 @@ export default function Player({ data = [] }) {
 
   return (
     <>
-      <h1>Sleep Sounds Player</h1>
       {/* play button */}
       <div id="play-container">
         <button name="play-pause" type="button" id="play-pause" onClick={() => play()}>
@@ -80,6 +83,20 @@ export default function Player({ data = [] }) {
           onChange={(e) => { adjustMasterVolume(e); }}
         >
         </input>
+      </div>
+      {/* Add additional sounds */}
+      <div>
+        <label htmlFor="otherSounds">Add sound</label>
+        <select
+          name="otherSounds"
+          value="Sounds"
+          onChange={e => console.log("optioned selected")}>
+          <option value="Select a sound">Select a sound</option>
+          {otherSounds.map((sound, i) =>
+          (
+            <option key={i} value={sound.name}>{sound.name}</option>
+          ))}
+        </select>
       </div>
     </>
   );
