@@ -5,7 +5,7 @@ import { v4 } from "uuid";
 export default function Player({ present = [], otherSounds = [] }) {
   // FIXME test othersounds and presents
   otherSounds = otherSounds.length === 0 ? present : otherSounds;
-  console.group(present);
+  // console.group(present);
 
   const maxVolumeLevel = 100;
   const [playing, setPlaying] = useState(false);
@@ -13,7 +13,8 @@ export default function Player({ present = [], otherSounds = [] }) {
 
   // In order to manipulate the individual volume sources with the master volume control
   // we need to associate a unique id with each sound source.
-  const soundSources = present.map(sound => ({ ...sound, id: v4() }));
+  const initialSoundSources = present.map(sound => ({ ...sound, id: v4() }));
+  const [soundSources, updateSoundSources] = useState(initialSoundSources);
 
   let justLoaded = true;
   const play = () => {
@@ -60,6 +61,13 @@ export default function Player({ present = [], otherSounds = [] }) {
 
   const getMasterVolume = () => (masterVolumeLevel);
 
+  const addSoundSource = (source) => {
+    const sourceToAdd = otherSounds[source];
+    const newSources = soundSources.push(sourceToAdd);
+    updateSoundSources(newSources);
+    console.log(`Adding the sound source ${sourceToAdd.name}`);
+  };
+
   return (
     <>
       {/* play button */}
@@ -90,11 +98,18 @@ export default function Player({ present = [], otherSounds = [] }) {
         <select
           name="otherSounds"
           value="Sounds"
-          onChange={e => console.log("optioned selected")}>
+          onChange={e => console.log("select interacted with")}
+        >
           <option value="Select a sound">Select a sound</option>
           {otherSounds.map((sound, i) =>
           (
-            <option key={i} value={sound.name}>{sound.name}</option>
+            <option
+              key={i}
+              value={i}
+              onClick={e => console.log(e)}
+            >
+              {sound.name}
+            </option>
           ))}
         </select>
       </div>
