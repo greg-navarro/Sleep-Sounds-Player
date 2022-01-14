@@ -61,6 +61,7 @@ export default function Player({ present = [], otherSounds = [] }) {
 
   const getMasterVolume = () => (masterVolumeLevel);
 
+  // const [selectedOption, setSelectedOption] = useState(options[0].value);
   const addSoundSource = (source) => {
     const sourceToAdd = otherSounds[source];
     const newSources = soundSources.push(sourceToAdd);
@@ -98,7 +99,7 @@ export default function Player({ present = [], otherSounds = [] }) {
         <select
           name="otherSounds"
           value="Sounds"
-          onChange={e => console.log("select interacted with")}
+          onChange={(e) => { console.log(e.target.value); }}
         >
           <option value="Select a sound">Select a sound</option>
           {otherSounds.map((sound, i) =>
@@ -106,7 +107,6 @@ export default function Player({ present = [], otherSounds = [] }) {
             <option
               key={i}
               value={i}
-              onClick={e => console.log(e)}
             >
               {sound.name}
             </option>
