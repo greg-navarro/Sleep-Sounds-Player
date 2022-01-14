@@ -2,13 +2,22 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { v4 } from "uuid";
 
-export default function Home({ presents = [] }) {
+export default function Home({ data = {} }) {
+  const presents = Object.keys(data).includes("presents") ? data.presents : [];
+  console.log(presents);
   // FIXME add test data (remove once data passed from parent)
-  presents.push({
-    id: v4(),
-    name: "groovy beach sounds"
-  });
-  const fullPresents = presents
+  const testData = {
+    "groovy-sounds": {
+      "name": "Groovy sounds",
+      "sounds": []
+    }
+  }
+  Object.assign(presents, testData);
+  // presents.push({
+  //   id: v4(),
+  //   name: "groovy beach sounds"
+  // });
+  const fullPresents = presents;
   // add search query to state (controlled component)
   const [query, setQuery] = useState("");
   // add the presents currently showing to the state
@@ -40,7 +49,7 @@ export default function Home({ presents = [] }) {
         <button onClick={filterResults}>Search</button>
       </div>
       {/* TODO make each button a link that takes use to a detail page w/ id */}
-      {displayedPresets.map((present, i) => (
+      {Object.values(displayedPresets).map((present, i) => (
         <div key={i} >
           <p>{present.name}</p>
         </div>
