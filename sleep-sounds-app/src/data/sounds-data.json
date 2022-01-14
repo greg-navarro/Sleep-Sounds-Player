@@ -31,6 +31,12 @@
       "name": "wave",
       "src": "https://www.soundjay.com/nature/sounds/ocean-wave-1.mp3",
       "imgSrc": ""
+    },
+    {
+      "id": "87b0b475-a5be-4kj5-85be-e7cbfb5ea17e",
+      "name": "wave2",
+      "src": "https://www.soundjay.com/nature/sounds/ocean-wave-2.mp3",
+      "imgSrc": ""
     }
   ]
 }
