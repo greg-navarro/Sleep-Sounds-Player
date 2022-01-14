@@ -1,17 +1,36 @@
-[
-  {
-    "name": "fire",
-    "src": "https://www.soundjay.com/nature/sounds/campfire-1.mp3",
-    "imgSrc": ""
+{
+  "presents": {
+    "beach-sounds": {
+      "name": "Relaxing beach sounds",
+      "sounds": [
+        "97d0b23e-7152-4055-a50f-3d6e34bf279f",
+        "3934465c-6385-4397-8c8f-41ea76b0d97f",
+        "77b0b475-a5be-4d15-85be-e7cbfb5ea17e"
+      ]
+    },
+    "rainy-day": {
+      "name": "Rainy day sounds",
+      "sounds": []
+    }
   },
-  {
-    "name": "highway",
-    "src": "https://www.soundjay.com/transportation/sounds/highway-1.mp3",
-    "imgSrc": ""
-  },
-  {
-    "name": "wave",
-    "src": "https://www.soundjay.com/nature/sounds/ocean-wave-1.mp3",
-    "imgSrc": ""
-  }
-]
+  "sounds": [
+    {
+      "id": "97d0b23e-7152-4055-a50f-3d6e34bf279f",
+      "name": "fire",
+      "src": "https://www.soundjay.com/nature/sounds/campfire-1.mp3",
+      "imgSrc": ""
+    },
+    {
+      "id": "3934465c-6385-4397-8c8f-41ea76b0d97f",
+      "name": "highway",
+      "src": "https://www.soundjay.com/transportation/sounds/highway-1.mp3",
+      "imgSrc": ""
+    },
+    {
+      "id": "77b0b475-a5be-4d15-85be-e7cbfb5ea17e",
+      "name": "wave",
+      "src": "https://www.soundjay.com/nature/sounds/ocean-wave-1.mp3",
+      "imgSrc": ""
+    }
+  ]
+}
