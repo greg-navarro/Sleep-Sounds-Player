@@ -5,7 +5,7 @@ export default function SoundSourceList({
   presents = [],
   otherSounds = [],
   getMasterVolume = f => f }) {
-  const [soundSourceElements, addSoundSourceElement] = useState([]);
+  const [soundSourceElements, setSoundSourceElement] = useState([]);
   // function to create Sound Source elements
   const initializeSoundSource = (sound) => {
     return (
@@ -23,8 +23,8 @@ export default function SoundSourceList({
   const addSoundSource = (sourceIndex) => {
     const sourceToAdd = otherSounds[sourceIndex];
     const newSource = initializeSoundSource(sourceToAdd);
-    soundSourceElements.push(newSource);
-    addSoundSourceElement(soundSourceElements);
+    setSoundSourceElement([...soundSourceElements, newSource]);
+    console.log(soundSourceElements);
   };
 
 
@@ -32,16 +32,7 @@ export default function SoundSourceList({
   return (
     <>
       <div id="sounds-container">
-        {presents.map(sound => (
-          <SoundSource
-            key={sound.name}
-            name={sound.name}
-            src={sound.src}
-            img={sound.imgSrc}
-            id={sound.id}
-            getMasterVolume={getMasterVolume}
-          />
-        ))}
+        {soundSourceElements}
       </div>
       {/* Add additional sounds */}
       <div>
