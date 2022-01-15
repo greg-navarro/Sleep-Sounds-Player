@@ -54,14 +54,16 @@ export default function Player({ present = [], otherSounds = [] }) {
       const rangeElement = document.querySelector(rangeID);
 
       const newVolumeLevel = (rangeElement.value / maxVolumeLevel) * (e.target.value / maxVolumeLevel);
-      console.log(`(${rangeElement.value} / ${maxVolumeLevel}) * ${e.target.value / maxVolumeLevel} = ${newVolumeLevel}`);
+      console.log(`${soundSrc.name}: (${rangeElement.value} / ${maxVolumeLevel}) * ${e.target.value / maxVolumeLevel} = ${newVolumeLevel}`);
       audioElement.volume = newVolumeLevel;
     }
   };
 
   const getMasterVolume = () => (masterVolumeLevel);
 
-  const registerNewSound = (newSound) => (setSoundSources([...soundSources, newSound]));
+  const registerNewSound = (newSound) => {
+    setSoundSources([...soundSources, newSound]);
+  };
 
   return (
     <>
