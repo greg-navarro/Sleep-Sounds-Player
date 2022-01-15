@@ -8,7 +8,8 @@ export default function SoundSource({
   max = 100,
   step = 2,
   getMasterVolume = f => f,
-  id = "" }) {
+  id = "",
+  masterVolumeRef }) {
   // constants
   const MIN = min;
   const MAX = max;
@@ -26,7 +27,7 @@ export default function SoundSource({
   // event handler for volume changes
   const adjustVolume = (e) => {
     // check for changes in master volume level
-    currentMasterVolume = getMasterVolume();
+    currentMasterVolume = masterVolumeRef.current.value;
     const newVolumeLevel = (e.target.value / MAX) * currentMasterVolume;
     console.log(`${name}(sound source): (${e.target.value} / ${MAX}) * ${currentMasterVolume} = ${newVolumeLevel}`);
     // set audio to new level

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import SoundSourceList from './SoundSourceList';
 import { v4 } from "uuid";
 
@@ -6,7 +6,7 @@ export default function Player({ present = [], otherSounds = [] }) {
   // FIXME test othersounds and presents
   otherSounds = otherSounds.length === 0 ? present : otherSounds;
   // console.group(present);
-
+  const masterVolumeRef = useRef();
   const maxVolumeLevel = 100;
   const [playing, setPlaying] = useState(false);
   const [masterVolumeLevel, setMasterVolumeLevel] = useState(0.5);
@@ -74,7 +74,7 @@ export default function Player({ present = [], otherSounds = [] }) {
         </button>
       </div>
       {/* sound ranges */}
-      <SoundSourceList present={present} otherSounds={otherSounds} getMasterVolume={getMasterVolume} registerNewSound={registerNewSound} />
+      <SoundSourceList present={present} otherSounds={otherSounds} getMasterVolume={getMasterVolume} registerNewSound={registerNewSound} masterVolumeRef={masterVolumeRef} />
       {/* master volume */}
       <div id="master-volume-container">
         <label htmlFor="master-volume">Master volume</label>
@@ -86,6 +86,7 @@ export default function Player({ present = [], otherSounds = [] }) {
           max="100"
           step="2"
           onChange={(e) => { adjustMasterVolume(e); }}
+          ref={masterVolumeRef}
         >
         </input>
       </div>

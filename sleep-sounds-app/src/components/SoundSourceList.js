@@ -5,7 +5,8 @@ export default function SoundSourceList({
   present = [],
   otherSounds = [],
   getMasterVolume = f => f,
-  registerNewSound = f => f
+  registerNewSound = f => f,
+  masterVolumeRef
 }) {
   const [soundSourceElements, setSoundSourceElement] = useState(present);
   console.log(soundSourceElements); // FIXME tester
@@ -19,6 +20,7 @@ export default function SoundSourceList({
         img={sound.imgSrc}
         id={sound.id}
         getMasterVolume={getMasterVolume}
+        masterVolumeRef={masterVolumeRef}
       />);
   };
 
