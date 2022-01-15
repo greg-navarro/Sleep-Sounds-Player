@@ -77,7 +77,7 @@ export default function Player({ present = [], otherSounds = [] }) {
         </button>
       </div>
       {/* sound ranges */}
-      <SoundSourceList soundList={soundSources} getMasterVolume={getMasterVolume} />
+      <SoundSourceList otherSounds={otherSounds} getMasterVolume={getMasterVolume} />
       {/* master volume */}
       <div id="master-volume-container">
         <label htmlFor="master-volume">Master volume</label>
