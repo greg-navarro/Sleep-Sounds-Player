@@ -8,9 +8,7 @@ export default function SoundSource({
   min = 0,
   max = 100,
   step = 2,
-  getMasterVolume = f => f,
-  id = "",
-  masterVolumeRef }) {
+  id = "" }) {
   // FIXME retrieve Player state from the parent Player component
   const { playing, masterVolumeLevel, registerNewSound } = useContext(PlayerContext);
 
@@ -25,22 +23,19 @@ export default function SoundSource({
   const audioSrc = useRef();
   const volumeControl = useRef();
 
-  // current volme level
-  let currentMasterVolume = getMasterVolume();
-
   // event handler for volume changes
   const adjustVolume = (e) => {
-    // check for changes in master volume level
-    currentMasterVolume = masterVolumeRef.current.value;
-    const newVolumeLevel = (e.target.value / MAX) * (currentMasterVolume / MAX);
-    console.log(`${name}(sound source): (${e.target.value} / ${MAX}) * ${currentMasterVolume / MAX} = ${newVolumeLevel}`);
-    // set audio to new level
+    // calculate new volume level
+    const newVolumeLevel = (e.target.value / MAX) * (masterVolumeLevel);
+    // FIXME debug line
+    console.log(`${name}(sound source): (${e.target.value} / ${MAX}) * ${masterVolumeLevel} = ${newVolumeLevel}`);
+    // set audio to new volume level
     audioSrc.current.volume = newVolumeLevel;
     console.log(`new volume level for ${name} is ${newVolumeLevel}`);
   };
 
-  // TODO initialize volume to correct level
   // TODO if the player is playing then start playing
+
   return (
     <div>
       <audio ref={audioSrc} src={src} className="audio-element" id={audioID} loop />
