@@ -14,7 +14,7 @@ export default function Player({ present = [], otherSounds = [] }) {
   // In order to manipulate the individual volume sources with the master volume control
   // we need to associate a unique id with each sound source.
   const initialSoundSources = present.map(sound => ({ ...sound, id: v4() }));
-  const [soundSources, updateSoundSources] = useState(initialSoundSources);
+  const [soundSources, setSoundSources] = useState(initialSoundSources);
 
   let justLoaded = true;
   const play = () => {
@@ -61,12 +61,7 @@ export default function Player({ present = [], otherSounds = [] }) {
 
   const getMasterVolume = () => (masterVolumeLevel);
 
-  // const [selectedOption, setSelectedOption] = useState(options[0].value);
-  const addSoundSource = (sourceIndex) => {
-    const sourceToAdd = otherSounds[sourceIndex];
-    soundSources.push(sourceToAdd);
-    updateSoundSources(soundSources);
-  };
+  const registerNewSound = (newSound) => (setSoundSources([...soundSources, newSound]));
 
   return (
     <>
@@ -77,7 +72,7 @@ export default function Player({ present = [], otherSounds = [] }) {
         </button>
       </div>
       {/* sound ranges */}
-      <SoundSourceList otherSounds={otherSounds} getMasterVolume={getMasterVolume} />
+      <SoundSourceList present={present} otherSounds={otherSounds} getMasterVolume={getMasterVolume} registerNewSound={registerNewSound} />
       {/* master volume */}
       <div id="master-volume-container">
         <label htmlFor="master-volume">Master volume</label>
@@ -91,29 +86,6 @@ export default function Player({ present = [], otherSounds = [] }) {
           onChange={(e) => { adjustMasterVolume(e); }}
         >
         </input>
-      </div>
-      {/* Add additional sounds */}
-      <div>
-        <label htmlFor="otherSounds">Add sound</label>
-        <select
-          name="otherSounds"
-          value="Sounds"
-          onChange={(e) => {
-            e.preventDefault();
-            addSoundSource(e.target.value);
-          }}
-        >
-          <option value="Select a sound">Select a sound</option>
-          {otherSounds.map((sound, i) =>
-          (
-            <option
-              key={i}
-              value={i}
-            >
-              {sound.name}
-            </option>
-          ))}
-        </select>
       </div>
     </>
   );

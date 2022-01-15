@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import SoundSource from "./SoundSource";
 
 export default function SoundSourceList({
-  presents = [],
+  present = [],
   otherSounds = [],
-  getMasterVolume = f => f }) {
+  getMasterVolume = f => f,
+  registerNewSound = f => f
+}) {
   const [soundSourceElements, setSoundSourceElement] = useState([]);
   // function to create Sound Source elements
   const initializeSoundSource = (sound) => {
@@ -25,6 +27,7 @@ export default function SoundSourceList({
     const newSource = initializeSoundSource(sourceToAdd);
     setSoundSourceElement([...soundSourceElements, newSource]);
     console.log(soundSourceElements);
+    registerNewSound(sourceToAdd)
   };
 
 
