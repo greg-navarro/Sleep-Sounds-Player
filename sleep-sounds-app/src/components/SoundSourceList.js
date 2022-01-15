@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import SoundSource from "./SoundSource";
+import { PlayerContext } from "./Player";
 
 export default function SoundSourceList({
   present = [],
   otherSounds = [],
   getMasterVolume = f => f,
-  registerNewSound = f => f,
   masterVolumeRef
 }) {
+  const { playing, masterVolumeLevel, registerNewSound } = useContext(PlayerContext);
   const [soundSourceElements, setSoundSourceElement] = useState(present);
   console.log(soundSourceElements); // FIXME tester
   // function to create Sound Source elements
@@ -32,7 +33,7 @@ export default function SoundSourceList({
     // TODO
     setSoundSourceElement([...soundSourceElements, newSource]);
     console.log(soundSourceElements);
-    registerNewSound(sourceToAdd)
+    registerNewSound(sourceToAdd);
   };
 
 

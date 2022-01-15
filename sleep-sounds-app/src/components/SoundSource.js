@@ -1,4 +1,5 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
+import { PlayerContext } from "./Player";
 
 export default function SoundSource({
   name = "",
@@ -10,6 +11,9 @@ export default function SoundSource({
   getMasterVolume = f => f,
   id = "",
   masterVolumeRef }) {
+  // FIXME retrieve Player state from the parent Player component
+  const { playing, masterVolumeLevel, registerNewSound } = useContext(PlayerContext);
+
   // constants
   const MIN = min;
   const MAX = max;
