@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router';
-// import './App.css';
+import './App.css';
 import { Navbar } from './components/Navbar';
 import Home from './components/Home';
 import Player from './components/Player';
