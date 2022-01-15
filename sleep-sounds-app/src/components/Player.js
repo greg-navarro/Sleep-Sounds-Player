@@ -1,11 +1,18 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, createContext } from 'react';
 import SoundSourceList from './SoundSourceList';
 import { v4 } from "uuid";
+
+export const PlayerContext = createContext(); // FIXME adds context and exports
 
 export default function Player({ present = [], otherSounds = [] }) {
   // FIXME test othersounds and presents
   otherSounds = otherSounds.length === 0 ? present : otherSounds;
   // console.group(present);
+
+  // FIXME start context changes
+
+  // FIXME end context changes
+
   const masterVolumeRef = useRef();
   const maxVolumeLevel = 100;
   const [playing, setPlaying] = useState(false);
@@ -66,7 +73,7 @@ export default function Player({ present = [], otherSounds = [] }) {
   };
 
   return (
-    <>
+    <PlayerContext.Provider value={{}}>
       {/* play button */}
       <div id="play-container">
         <button name="play-pause" type="button" id="play-pause" onClick={() => play()}>
@@ -90,6 +97,6 @@ export default function Player({ present = [], otherSounds = [] }) {
         >
         </input>
       </div>
-    </>
+    </PlayerContext.Provider>
   );
 }
