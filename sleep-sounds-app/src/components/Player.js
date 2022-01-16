@@ -15,20 +15,11 @@ export default function Player({ presentOptions = {}, soundObjects = [] }) {
   const soundSourcesFromPresent = presentFromParam.sounds.map(soundID => soundObjects.find(sound => sound.id === soundID));
   const [soundSources, setSoundSources] = useState(soundSourcesFromPresent);
   console.log(soundSources);
-  // FIXME end custom or present
-  // We know this b/c there is or isn't a param
-
-
-
-
 
   const masterVolumeRef = useRef();
   const maxVolumeLevel = 100;
   const [playing, setPlaying] = useState(false);
   const [masterVolumeLevel, setMasterVolumeLevel] = useState(0.5);
-
-
-
 
   const play = () => {
     const audioElements = document.querySelectorAll(".audio-element");
