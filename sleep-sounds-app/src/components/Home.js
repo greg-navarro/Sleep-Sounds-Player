@@ -8,7 +8,8 @@ export default function Home({ data = {} }) {
   const testData = {
     "groovy-sounds": {
       "name": "Groovy sounds",
-      "sounds": []
+      "sounds": [],
+      "id": 100
     }
   }
   Object.assign(presents, testData);
