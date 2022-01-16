@@ -10,7 +10,7 @@ export default function SoundSource({
   step = 2,
   id = "" }) {
   // FIXME retrieve Player state from the parent Player component
-  const { playing, masterVolumeLevel, registerNewSound } = useContext(PlayerContext);
+  const { playing, masterVolumeLevel } = useContext(PlayerContext);
 
   // constants
   const MIN = min;
