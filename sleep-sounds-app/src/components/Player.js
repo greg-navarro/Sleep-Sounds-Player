@@ -4,19 +4,19 @@ import SoundSourceList from './SoundSourceList';
 
 export const PlayerContext = createContext(); // FIXME adds context and exports
 
-export default function Player({ presentOptions = {}, soundObjects = [] }) {
-  // FIXME custom or present
+export default function Player({ presentOptions = {}, soundObjects = [], customPlayer = false }) {
+  console.log("werks");
+  let initialSoundSources = []
   // Step 1: is the present present? (if not, player is custom)
   const { id } = useParams(); // TODO see what happens if no id is given, this will determine how to create custom player
-  // console.log("Provided id: " + id);
-  // console.log(presentOptions);
-  // console.log(soundObjects);
-  const presentFromParam = Object.values(presentOptions).find(present => present.id === parseInt(id));
-  const soundSourcesFromPresent = presentFromParam.sounds.map(soundID => soundObjects.find(sound => sound.id === soundID));
-  // console.log("werks");
-  const [soundSources, setSoundSources] = useState(soundSourcesFromPresent);
-  // console.log(soundSources);
-  // console.log("printed sound sources");
+  if (id) {
+    const presentFromParam = Object.values(presentOptions).find(present => present.id === parseInt(id));
+    const soundSourcesFromPresent = presentFromParam.sounds.map(soundID => soundObjects.find(sound => sound.id === soundID));
+    initialSoundSources.push(...soundSourcesFromPresent)
+  }
+  const [soundSources, setSoundSources] = useState(initialSoundSources);
+
+  console.log("werks");
   const masterVolumeRef = useRef();
   const maxVolumeLevel = 100;
   const [playing, setPlaying] = useState(false);
@@ -65,7 +65,7 @@ export default function Player({ presentOptions = {}, soundObjects = [] }) {
         </button>
       </div>
       {/* sound ranges */}
-      <SoundSourceList presentSounds={soundSources} />
+      <SoundSourceList presentSounds={soundSources} customPlayer={customPlayer} otherSounds={soundObjects} />
       {/* master volume */}
       <div id="master-volume-container">
         <label htmlFor="master-volume">Master volume</label>
