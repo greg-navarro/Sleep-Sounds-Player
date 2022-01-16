@@ -22,6 +22,8 @@ export default function SoundSourceList({
 
   const presentSoundSourceElements = presentSounds.map(sound => initializeSoundSource(sound));
   const [soundSourceElements, setSoundSourceElement] = useState(presentSoundSourceElements);
+  const [availableSounds, setAvailableSounds] = useState(otherSounds);
+  const [soundsInUse, setSoundsInUse] = useState([]);
 
   // Function to add sound sources to the list.
   // Calls the 'register' function to register the element with Parent.
@@ -30,12 +32,19 @@ export default function SoundSourceList({
     const sourceToAdd = otherSounds[sourceIndex];
     const newSource = initializeSoundSource(sourceToAdd);
     setSoundSourceElement([...soundSourceElements, newSource]);
-    console.log(soundSourceElements);
+    setSoundsInUse([...soundsInUse, sourceToAdd.id]);
+    setAvailableSounds(availableSounds.slice(sourceIndex));
+    // console.log(soundSourceElements);
     registerNewSound(sourceToAdd);
   };
 
+  // pare down otherSounds to remove those sounds already in use
 
-  console.log("werks");
+  // const soundSourceElementIDs = soundSourceElements.map(soundSourceElement => soundSourceElement.id);
+  // const unusedSounds = otherSounds.filter(sound => soundSourceElementIDs.includes(sound.id));
+  // console.log(soundSourceElements);
+  // console.log(otherSounds);
+  // console.log("werks");
   return (
     <>
       <div id="sounds-container">
@@ -55,7 +64,7 @@ export default function SoundSourceList({
             }}
           >
             <option value="Select a sound">Select a sound</option>
-            {otherSounds.map((sound, i) =>
+            {availableSounds.map((sound, i) =>
             (
               <option
                 key={i}
