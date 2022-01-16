@@ -9,10 +9,6 @@ export default function Player({ present = [], otherSounds = [] }) {
   otherSounds = otherSounds.length === 0 ? present : otherSounds;
   // console.group(present);
 
-  // FIXME start context changes
-
-  // FIXME end context changes
-
   const masterVolumeRef = useRef();
   const maxVolumeLevel = 100;
   const [playing, setPlaying] = useState(false);
@@ -47,7 +43,9 @@ export default function Player({ present = [], otherSounds = [] }) {
         audioElement.pause();
       }
     }
-    setPlaying(!playing);
+    if (soundSources.length > 0)
+      setPlaying(!playing);
+    console.log(playing);
   };
 
   const adjustMasterVolume = (e) => {
@@ -61,7 +59,7 @@ export default function Player({ present = [], otherSounds = [] }) {
       const rangeElement = document.querySelector(rangeID);
 
       const newVolumeLevel = (rangeElement.value / maxVolumeLevel) * (e.target.value / maxVolumeLevel);
-      console.log(`${soundSrc.name}: (${rangeElement.value} / ${maxVolumeLevel}) * ${e.target.value / maxVolumeLevel} = ${newVolumeLevel}`);
+      // console.log(`${soundSrc.name}: (${rangeElement.value} / ${maxVolumeLevel}) * ${e.target.value / maxVolumeLevel} = ${newVolumeLevel}`);
       audioElement.volume = newVolumeLevel;
     }
   };

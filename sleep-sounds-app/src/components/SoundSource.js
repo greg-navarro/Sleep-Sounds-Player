@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import { PlayerContext } from "./Player";
 
 export default function SoundSource({
@@ -28,13 +28,22 @@ export default function SoundSource({
     // calculate new volume level
     const newVolumeLevel = (e.target.value / MAX) * (masterVolumeLevel);
     // FIXME debug line
-    console.log(`${name}(sound source): (${e.target.value} / ${MAX}) * ${masterVolumeLevel} = ${newVolumeLevel}`);
+    // console.log(`${name}(sound source): (${e.target.value} / ${MAX}) * ${masterVolumeLevel} = ${newVolumeLevel}`);
     // set audio to new volume level
     audioSrc.current.volume = newVolumeLevel;
-    console.log(`new volume level for ${name} is ${newVolumeLevel}`);
+    // console.log(`new volume level for ${name} is ${newVolumeLevel}`);
   };
 
   // TODO if the player is playing then start playing
+  useEffect(() => {
+    if (playing) {
+      // console.log(`${name}: The player is set to play`);
+      audioSrc.current.play();
+    } else {
+      // console.log(`${name}: The player is set to pause`)
+      audioSrc.current.pause();
+    }
+  });
 
   return (
     <div>
