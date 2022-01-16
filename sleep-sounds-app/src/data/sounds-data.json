@@ -6,11 +6,13 @@
         "97d0b23e-7152-4055-a50f-3d6e34bf279f",
         "3934465c-6385-4397-8c8f-41ea76b0d97f",
         "77b0b475-a5be-4d15-85be-e7cbfb5ea17e"
-      ]
+      ],
+      "id": 1
     },
     "rainy-day": {
       "name": "Rainy day sounds",
-      "sounds": []
+      "sounds": [],
+      "id": 2
     }
   },
   "sounds": [
