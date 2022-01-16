@@ -12,7 +12,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home data={soundData} />} />
-        {/* <Route path="/oldeplayer" element={<Player present={[...soundData]} />} /> */}
+        <Route path="/player/:id" element={<Player present={[...soundData]} />} />
         <Route path="/custom-player" element={<Player otherSounds={soundData.sounds} />} />
       </Routes>
 
