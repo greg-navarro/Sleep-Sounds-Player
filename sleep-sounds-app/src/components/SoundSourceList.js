@@ -5,6 +5,7 @@ import { PlayerContext } from "./Player";
 export default function SoundSourceList({
   presentSounds = [],
   otherSounds = [],
+  customPlayer = false
 }) {
   // function to initialize sound source components
   const initializeSoundSource = (sound) => {
@@ -40,29 +41,32 @@ export default function SoundSourceList({
       <div id="sounds-container">
         {soundSourceElements}
       </div>
-      {/* Add additional sounds */}
-      <div>
-        <label htmlFor="otherSounds">Add sound</label>
-        <select
-          name="otherSounds"
-          value="Sounds"
-          onChange={(e) => {
-            e.preventDefault();
-            addSoundSource(e.target.value);
-          }}
-        >
-          <option value="Select a sound">Select a sound</option>
-          {otherSounds.map((sound, i) =>
-          (
-            <option
-              key={i}
-              value={i}
-            >
-              {sound.name}
-            </option>
-          ))}
-        </select>
-      </div>
+      {
+        /* Add additional sounds */
+        customPlayer &&
+        <div>
+          <label htmlFor="otherSounds">Add sound</label>
+          <select
+            name="otherSounds"
+            value="Sounds"
+            onChange={(e) => {
+              e.preventDefault();
+              addSoundSource(e.target.value);
+            }}
+          >
+            <option value="Select a sound">Select a sound</option>
+            {otherSounds.map((sound, i) =>
+            (
+              <option
+                key={i}
+                value={i}
+              >
+                {sound.name}
+              </option>
+            ))}
+          </select>
+        </div>
+      }
     </>
   );
 }
