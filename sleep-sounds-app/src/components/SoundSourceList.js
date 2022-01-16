@@ -6,10 +6,7 @@ export default function SoundSourceList({
   presentSounds = [],
   otherSounds = [],
 }) {
-  const { registerNewSound } = useContext(PlayerContext);
-  const [soundSourceElements, setSoundSourceElement] = useState(presentSounds);
-  console.log(soundSourceElements); // FIXME tester
-  // function to create Sound Source elements
+  // function to initialize sound source components
   const initializeSoundSource = (sound) => {
     return (
       <SoundSource
@@ -21,8 +18,13 @@ export default function SoundSourceList({
       />);
   };
 
+
+  const presentSoundSourceElements = presentSounds.map(sound => initializeSoundSource(sound));
+  const [soundSourceElements, setSoundSourceElement] = useState(presentSoundSourceElements);
+
   // Function to add sound sources to the list.
   // Calls the 'register' function to register the element with Parent.
+  const { registerNewSound } = useContext(PlayerContext); // retrieve from context
   const addSoundSource = (sourceIndex) => {
     const sourceToAdd = otherSounds[sourceIndex];
     const newSource = initializeSoundSource(sourceToAdd);
@@ -32,7 +34,7 @@ export default function SoundSourceList({
   };
 
 
-
+  console.log("werks");
   return (
     <>
       <div id="sounds-container">

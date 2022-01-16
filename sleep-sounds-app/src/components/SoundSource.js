@@ -9,6 +9,7 @@ export default function SoundSource({
   max = 100,
   step = 2,
   id = "" }) {
+  console.log("might werks");
   // FIXME retrieve Player state from the parent Player component
   const { playing, masterVolumeLevel } = useContext(PlayerContext);
 
@@ -44,7 +45,7 @@ export default function SoundSource({
       audioSrc.current.pause();
     }
   });
-
+  console.log("werks");
   return (
     <div>
       <audio ref={audioSrc} src={src} className="audio-element" id={audioID} loop />

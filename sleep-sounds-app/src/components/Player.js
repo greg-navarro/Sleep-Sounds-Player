@@ -8,14 +8,15 @@ export default function Player({ presentOptions = {}, soundObjects = [] }) {
   // FIXME custom or present
   // Step 1: is the present present? (if not, player is custom)
   const { id } = useParams(); // TODO see what happens if no id is given, this will determine how to create custom player
-  console.log("Provided id: " + id);
-  console.log(presentOptions);
-  console.log(soundObjects);
-  const presentFromParam = Object.values(presentOptions).find(present => present.id === id);
+  // console.log("Provided id: " + id);
+  // console.log(presentOptions);
+  // console.log(soundObjects);
+  const presentFromParam = Object.values(presentOptions).find(present => present.id === parseInt(id));
   const soundSourcesFromPresent = presentFromParam.sounds.map(soundID => soundObjects.find(sound => sound.id === soundID));
+  // console.log("werks");
   const [soundSources, setSoundSources] = useState(soundSourcesFromPresent);
-  console.log(soundSources);
-
+  // console.log(soundSources);
+  // console.log("printed sound sources");
   const masterVolumeRef = useRef();
   const maxVolumeLevel = 100;
   const [playing, setPlaying] = useState(false);
@@ -54,7 +55,7 @@ export default function Player({ presentOptions = {}, soundObjects = [] }) {
   const registerNewSound = (newSound) => {
     setSoundSources([...soundSources, newSound]);
   };
-
+  console.log("werks");
   return (
     <PlayerContext.Provider value={{ playing, masterVolumeLevel, registerNewSound }}>
       {/* play button */}
