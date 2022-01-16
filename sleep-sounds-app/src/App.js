@@ -6,14 +6,17 @@ import Player from './components/Player';
 import soundData from './data/sounds-data.json';
 
 function App() {
+  // In this component we are loading mock data
+  const presentOptions = soundData.presents;
+  const soundObjects = soundData.sounds;
 
   return (
     <div className="App">
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home data={soundData} />} />
-        <Route path="/player/:id" element={<Player present={[...soundData]} />} />
-        <Route path="/custom-player" element={<Player otherSounds={soundData.sounds} />} />
+        <Route path="/" element={<Home data={soundData} presentOptions={presentOptions} />} />
+        <Route path="/player/:id" element={<Player soundObjects={soundObjects} />} />
+        <Route path="/custom-player" element={<Player otherSounds={soundData.sounds} soundObjects={soundObjects} />} />
       </Routes>
 
     </div>
