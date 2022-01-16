@@ -3,13 +3,11 @@ import SoundSource from "./SoundSource";
 import { PlayerContext } from "./Player";
 
 export default function SoundSourceList({
-  present = [],
+  presentSounds = [],
   otherSounds = [],
-  getMasterVolume = f => f,
-  masterVolumeRef
 }) {
-  const { playing, masterVolumeLevel, registerNewSound } = useContext(PlayerContext);
-  const [soundSourceElements, setSoundSourceElement] = useState(present);
+  const { registerNewSound } = useContext(PlayerContext);
+  const [soundSourceElements, setSoundSourceElement] = useState(presentSounds);
   console.log(soundSourceElements); // FIXME tester
   // function to create Sound Source elements
   const initializeSoundSource = (sound) => {
@@ -20,8 +18,6 @@ export default function SoundSourceList({
         src={sound.src}
         img={sound.imgSrc}
         id={sound.id}
-        getMasterVolume={getMasterVolume}
-        masterVolumeRef={masterVolumeRef}
       />);
   };
 
@@ -30,7 +26,6 @@ export default function SoundSourceList({
   const addSoundSource = (sourceIndex) => {
     const sourceToAdd = otherSounds[sourceIndex];
     const newSource = initializeSoundSource(sourceToAdd);
-    // TODO
     setSoundSourceElement([...soundSourceElements, newSource]);
     console.log(soundSourceElements);
     registerNewSound(sourceToAdd);
