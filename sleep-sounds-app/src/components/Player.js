@@ -1,14 +1,24 @@
 import React, { useState, useRef, createContext } from 'react';
 import { useParams } from 'react-router-dom';
 import SoundSourceList from './SoundSourceList';
-import { v4 } from "uuid";
 
 export const PlayerContext = createContext(); // FIXME adds context and exports
 
-export default function Player({ present = null, otherSounds = [] }) {
-  // FIXME test othersounds and presents
-  // otherSounds = otherSounds.length === 0 ? present : otherSounds;
-  // console.group(present);
+export default function Player({ presentOptions = {}, soundObjects = [] }) {
+  // FIXME custom or present
+  // Step 1: is the present present? (if not, player is custom)
+  const { id } = useParams(); // TODO see what happens if no id is given, this will determine how to create custom player
+  console.log("Provided id: " + id);
+  console.log(presentOptions);
+  console.log(soundObjects);
+  const presentFromParam = Object.values(presentOptions).find(present => present.id === id);
+  const soundSourcesFromPresent = presentFromParam.sounds.map(soundID => soundObjects.find(sound => sound.id === soundID));
+  const [soundSources, setSoundSources] = useState(soundSourcesFromPresent);
+  console.log(soundSources);
+  // FIXME end custom or present
+  // We know this b/c there is or isn't a param
+
+
 
 
 
@@ -17,52 +27,10 @@ export default function Player({ present = null, otherSounds = [] }) {
   const [playing, setPlaying] = useState(false);
   const [masterVolumeLevel, setMasterVolumeLevel] = useState(0.5);
 
-  // In order to manipulate the individual volume sources with the master volume control
-  // we need to associate a unique id with each sound source.
-  const initialSoundSources = present.map(sound => ({ ...sound, id: v4() }));
-  const [soundSources, setSoundSources] = useState(initialSoundSources);
-
-  // Step 1: is the present present? (if not, player is custom)
-  const { id } = useParams();
-  const presentFromParam = otherSounds.find(sound => sound.id === id);
-  // Step 2 (w/ present): filter otherSounds for the sounds in present, then remove these from otherSounds
-  let unusedSounds = otherSounds;
-  if (present) {
-    const soundSourcesFromPresent = [];
-    for (const soundID of present.sounds) {
-      const soundObject = otherSounds.find(obj => obj.id === soundID);
-      soundSourcesFromPresent.push(soundObject);
-      unusedSounds = unusedSounds.filter(sound => sound.id !== soundID);
-    }
-    setSoundSources([...soundSources, ...soundSourcesFromPresent]);
-  } else if (presentFromParam) {
-    const soundSourcesFromPresent = [];
-    for (const soundID of presentFromParam.sounds) {
-      const soundObject = otherSounds.find(obj => obj.id === soundID);
-      soundSourcesFromPresent.push(soundObject);
-      unusedSounds = unusedSounds.filter(sound => sound.id !== soundID);
-    }
-    setSoundSources([...soundSources, ...soundSourcesFromPresent]);
-  }
 
 
 
-  let justLoaded = true;
   const play = () => {
-    // if page has just loaded then reduce initial volume to 50% to match default range value
-    if (justLoaded) {
-      justLoaded = false;
-      for (const soundSrc of soundSources) {
-        const audioID = "#audio" + soundSrc.id.toString();
-        const rangeID = "#range" + soundSrc.id.toString();
-        const audioElement = document.querySelector(audioID);
-        const rangeElement = document.querySelector(rangeID);
-
-        const newVolumeLevel = (rangeElement.value / maxVolumeLevel) * masterVolumeLevel;
-        audioElement.volume = newVolumeLevel;
-      }
-    }
-
     const audioElements = document.querySelectorAll(".audio-element");
     for (const audioElement of audioElements) {
       if (playing) {
@@ -92,8 +60,6 @@ export default function Player({ present = null, otherSounds = [] }) {
     }
   };
 
-  const getMasterVolume = () => (masterVolumeLevel);
-
   const registerNewSound = (newSound) => {
     setSoundSources([...soundSources, newSound]);
   };
@@ -107,7 +73,7 @@ export default function Player({ present = null, otherSounds = [] }) {
         </button>
       </div>
       {/* sound ranges */}
-      <SoundSourceList present={present} otherSounds={unusedSounds} getMasterVolume={getMasterVolume} registerNewSound={registerNewSound} masterVolumeRef={masterVolumeRef} />
+      <SoundSourceList presentSounds={soundSources} />
       {/* master volume */}
       <div id="master-volume-container">
         <label htmlFor="master-volume">Master volume</label>
