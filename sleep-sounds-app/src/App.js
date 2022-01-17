@@ -11,15 +11,18 @@ function App() {
   const soundObjects = soundData.sounds; // an array of sounds objects
 
   return (
-    <div className="App">
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home presentOptions={presentOptions} />} />
-        <Route path="/player/:id" element={<Player presentOptions={presentOptions} soundObjects={soundObjects} />} />
-        <Route path="/custom-player" element={<Player presentOptions={presentOptions} soundObjects={soundObjects} customPlayer={true} />} />
-      </Routes>
-
-    </div>
+    <>
+      <div className="App-header">
+        <Navbar />
+      </div>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Home presentOptions={presentOptions} />} />
+          <Route path="/player/:id" element={<Player presentOptions={presentOptions} soundObjects={soundObjects} />} />
+          <Route path="/custom-player" element={<Player presentOptions={presentOptions} soundObjects={soundObjects} customPlayer={true} />} />
+        </Routes>
+      </div>
+    </>
   );
 }
 
