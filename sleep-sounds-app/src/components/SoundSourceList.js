@@ -1,13 +1,14 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import SoundSource from "./SoundSource";
 import { PlayerContext } from "./Player";
 
 export default function SoundSourceList({
-  presentSounds = [],
-  otherSounds = [],
   customPlayer = false
 }) {
-  // function to initialize sound source components
+  // Retrieve functions and state from the PlayerContext.
+  const { registerNewSound, soundSources, soundObjects } = useContext(PlayerContext); // retrieve from context
+
+  // Initialize SoundSource components.
   const initializeSoundSource = (sound) => {
     return (
       <SoundSource
@@ -19,36 +20,25 @@ export default function SoundSourceList({
       />);
   };
 
+  // Use current 'soundSources' data objects to initialize an array SoundSource React components.
+  const presentSoundSourceElements = soundSources.map(sound => initializeSoundSource(sound));
+  // Array of sound data objects in soundObjects but not in soundSources.
+  // This will serve as the data for populating the Select element with Options.
+  const soundSourceIDs = soundSources.map(sound => sound.id);
+  const availableSounds = soundObjects.filter(sound => !soundSourceIDs.includes(sound.id));
 
-  const presentSoundSourceElements = presentSounds.map(sound => initializeSoundSource(sound));
-  const [soundSourceElements, setSoundSourceElement] = useState(presentSoundSourceElements);
-  const [availableSounds, setAvailableSounds] = useState(otherSounds);
-  const [soundsInUse, setSoundsInUse] = useState([]);
 
-  // Function to add sound sources to the list.
+  // Add sound sources to the list.
   // Calls the 'register' function to register the element with Parent.
-  const { registerNewSound } = useContext(PlayerContext); // retrieve from context
   const addSoundSource = (sourceIndex) => {
-    const sourceToAdd = otherSounds[sourceIndex];
-    const newSource = initializeSoundSource(sourceToAdd);
-    setSoundSourceElement([...soundSourceElements, newSource]);
-    setSoundsInUse([...soundsInUse, sourceToAdd.id]);
-    setAvailableSounds(availableSounds.slice(sourceIndex));
-    // console.log(soundSourceElements);
+    const sourceToAdd = availableSounds[sourceIndex];
     registerNewSound(sourceToAdd);
   };
 
-  // pare down otherSounds to remove those sounds already in use
-
-  // const soundSourceElementIDs = soundSourceElements.map(soundSourceElement => soundSourceElement.id);
-  // const unusedSounds = otherSounds.filter(sound => soundSourceElementIDs.includes(sound.id));
-  // console.log(soundSourceElements);
-  // console.log(otherSounds);
-  // console.log("werks");
   return (
     <>
       <div id="sounds-container">
-        {soundSourceElements}
+        {presentSoundSourceElements}
       </div>
       {
         /* Add additional sounds */
