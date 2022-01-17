@@ -2,26 +2,32 @@ import React, { useState, useRef, createContext } from 'react';
 import { useParams } from 'react-router-dom';
 import SoundSourceList from './SoundSourceList';
 
-export const PlayerContext = createContext(); // FIXME adds context and exports
+export const PlayerContext = createContext();
 
 export default function Player({ presentOptions = {}, soundObjects = [], customPlayer = false }) {
-  console.log("werks");
   let initialSoundSources = []
-  // Step 1: is the present present? (if not, player is custom)
-  const { id } = useParams(); // TODO see what happens if no id is given, this will determine how to create custom player
+  // Check if the present is specified in the parameters
+  // If not, this will be treated as a 'custom player' and functionality to add and remove sounds will be made available.
+  const { id } = useParams();
   if (id) {
-    const presentFromParam = Object.values(presentOptions).find(present => present.id === parseInt(id));
-    const soundSourcesFromPresent = presentFromParam.sounds.map(soundID => soundObjects.find(sound => sound.id === soundID));
+    const presentFromParam = Object.values(presentOptions)
+      .find(present => present.id === parseInt(id));
+    const soundSourcesFromPresent = presentFromParam.sounds
+      .map(soundID => soundObjects.find(sound => sound.id === soundID));
     initialSoundSources.push(...soundSourcesFromPresent)
   }
-  const [soundSources, setSoundSources] = useState(initialSoundSources);
 
-  console.log("werks");
+  // Initialize state:
+  //  1. sound sources in use
+  //  2. play/pause
+  //  3. master volume level - defaults at 50%
+  const [soundSources, setSoundSources] = useState(initialSoundSources);
+  const [playing, setPlaying] = useState(false);
   const masterVolumeRef = useRef();
   const maxVolumeLevel = 100;
-  const [playing, setPlaying] = useState(false);
   const [masterVolumeLevel, setMasterVolumeLevel] = useState(0.5);
 
+  // Handles play/pause button click events.
   const play = () => {
     const audioElements = document.querySelectorAll(".audio-element");
     for (const audioElement of audioElements) {
@@ -36,6 +42,7 @@ export default function Player({ presentOptions = {}, soundObjects = [], customP
     console.log(playing);
   };
 
+  // Handles adjustments in master volume level.
   const adjustMasterVolume = (e) => {
     // update state
     setMasterVolumeLevel(e.target.value / maxVolumeLevel);
@@ -52,12 +59,19 @@ export default function Player({ presentOptions = {}, soundObjects = [], customP
     }
   };
 
+  // Adds sounds not currently in use to the array of sounds currently IN use.
   const registerNewSound = (newSound) => {
     setSoundSources([...soundSources, newSound]);
   };
-  console.log("werks");
+
+  // Removes a sound from the array of those currently in use.
+  const removeSound = (soundID) => {
+    const remainingSounds = soundSources.filter(sound => sound.id !== soundID);
+    setSoundSources(remainingSounds);
+  }
+
   return (
-    <PlayerContext.Provider value={{ playing, masterVolumeLevel, registerNewSound }}>
+    <PlayerContext.Provider value={{ playing, masterVolumeLevel, registerNewSound, removeSound, soundSources, soundObjects }}>
       {/* play button */}
       <div id="play-container">
         <button name="play-pause" type="button" id="play-pause" onClick={() => play()}>
@@ -65,7 +79,7 @@ export default function Player({ presentOptions = {}, soundObjects = [], customP
         </button>
       </div>
       {/* sound ranges */}
-      <SoundSourceList presentSounds={soundSources} customPlayer={customPlayer} otherSounds={soundObjects} />
+      <SoundSourceList customPlayer={customPlayer} />
       {/* master volume */}
       <div id="master-volume-container">
         <label htmlFor="master-volume">Master volume</label>
