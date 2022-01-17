@@ -71,7 +71,7 @@ export default function Player({ presentOptions = {}, soundObjects = [], customP
   }
 
   return (
-    <PlayerContext.Provider value={{ playing, masterVolumeLevel, registerNewSound, removeSound, soundSources, soundObjects }}>
+    <PlayerContext.Provider value={{ playing, masterVolumeLevel, registerNewSound, removeSound, soundSources, soundObjects, customPlayer }}>
       {/* play button */}
       <div id="play-container">
         <button name="play-pause" type="button" id="play-pause" onClick={() => play()}>

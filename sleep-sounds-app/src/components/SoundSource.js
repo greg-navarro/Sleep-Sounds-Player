@@ -12,7 +12,7 @@ export default function SoundSource({
   id = "" }) {
   console.log("might werks");
   // FIXME retrieve Player state from the parent Player component
-  const { playing, masterVolumeLevel, removeSound } = useContext(PlayerContext);
+  const { playing, masterVolumeLevel, removeSound, customPlayer } = useContext(PlayerContext);
 
   // constants
   const MIN = min;
@@ -61,7 +61,7 @@ export default function SoundSource({
         step={STEP.toString()}
         onChange={(e) => adjustVolume(e)}
       ></input>
-      <button onClick={() => removeSound(id)}><FaTrash /></button>
+      {customPlayer && <button onClick={() => removeSound(id)}><FaTrash /></button>}
     </div>
   );
 }
