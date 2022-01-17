@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useContext } from "react";
 import { PlayerContext } from "./Player";
+import { FaTrash } from "react-icons/fa";
 
 export default function SoundSource({
   name = "",
@@ -11,7 +12,7 @@ export default function SoundSource({
   id = "" }) {
   console.log("might werks");
   // FIXME retrieve Player state from the parent Player component
-  const { playing, masterVolumeLevel } = useContext(PlayerContext);
+  const { playing, masterVolumeLevel, removeSound } = useContext(PlayerContext);
 
   // constants
   const MIN = min;
@@ -29,10 +30,10 @@ export default function SoundSource({
     // calculate new volume level
     const newVolumeLevel = (e.target.value / MAX) * (masterVolumeLevel);
     // FIXME debug line
-    // console.log(`${name}(sound source): (${e.target.value} / ${MAX}) * ${masterVolumeLevel} = ${newVolumeLevel}`);
+    console.log(`${name}(sound source): (${e.target.value} / ${MAX}) * ${masterVolumeLevel} = ${newVolumeLevel}`);
     // set audio to new volume level
     audioSrc.current.volume = newVolumeLevel;
-    // console.log(`new volume level for ${name} is ${newVolumeLevel}`);
+    console.log(`new volume level for ${name} is ${newVolumeLevel}`);
   };
 
   // TODO if the player is playing then start playing
@@ -60,6 +61,7 @@ export default function SoundSource({
         step={STEP.toString()}
         onChange={(e) => adjustVolume(e)}
       ></input>
+      <button onClick={() => removeSound(id)}><FaTrash /></button>
     </div>
   );
 }
