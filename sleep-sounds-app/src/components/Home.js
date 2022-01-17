@@ -2,20 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Home({ presentOptions = {} }) {
-  // FIXME add test data (remove once data passed from parent)
-  // const presents = presentOptions;
-  // console.log(presents);
-
-  // const testData = {
-  //   "groovy-sounds": {
-  //     "name": "Groovy sounds",
-  //     "sounds": [],
-  //     "id": 100
-  //   }
-  // }
-  // Object.assign(presents, testData);
-  // FIXME end test data (remove once data passed from parent)
-
   // SEARCH BAR DATA/FUNCTIONALITY
   const fullPresents = presentOptions;
   // add search query to state (controlled component)
@@ -45,7 +31,7 @@ export default function Home({ presentOptions = {} }) {
         />
         <button onClick={filterResults}>Search</button>
       </div>
-      {/* TODO make each button a link that takes use to a detail page w/ id */}
+      {/* each button links to a player page w/ id */}
       {Object.values(displayedPresets).map((present, i) => (
         <div key={i} >
           <Link to={"/player/" + present.id}><p>{present.name}</p></Link>

@@ -10,11 +10,9 @@ export default function SoundSource({
   max = 100,
   step = 2,
   id = "" }) {
-  console.log("might werks");
-  // FIXME retrieve Player state from the parent Player component
   const { playing, masterVolumeLevel, removeSound, customPlayer } = useContext(PlayerContext);
 
-  // constants
+  // constants for volume range
   const MIN = min;
   const MAX = max;
   const STEP = step;
@@ -29,24 +27,19 @@ export default function SoundSource({
   const adjustVolume = (e) => {
     // calculate new volume level
     const newVolumeLevel = (e.target.value / MAX) * (masterVolumeLevel);
-    // FIXME debug line
-    console.log(`${name}(sound source): (${e.target.value} / ${MAX}) * ${masterVolumeLevel} = ${newVolumeLevel}`);
     // set audio to new volume level
     audioSrc.current.volume = newVolumeLevel;
-    console.log(`new volume level for ${name} is ${newVolumeLevel}`);
   };
 
-  // TODO if the player is playing then start playing
+  // Effect: if the player is playing then start set audio component to play
   useEffect(() => {
     if (playing) {
-      // console.log(`${name}: The player is set to play`);
       audioSrc.current.play();
     } else {
-      // console.log(`${name}: The player is set to pause`)
       audioSrc.current.pause();
     }
   });
-  console.log("werks");
+
   return (
     <div>
       <audio ref={audioSrc} src={src} className="audio-element" id={audioID} loop />

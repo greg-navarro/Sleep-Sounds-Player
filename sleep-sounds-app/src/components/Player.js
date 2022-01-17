@@ -39,7 +39,6 @@ export default function Player({ presentOptions = {}, soundObjects = [], customP
     }
     if (soundSources.length > 0)
       setPlaying(!playing);
-    console.log(playing);
   };
 
   // Handles adjustments in master volume level.
@@ -54,7 +53,6 @@ export default function Player({ presentOptions = {}, soundObjects = [], customP
       const rangeElement = document.querySelector(rangeID);
 
       const newVolumeLevel = (rangeElement.value / maxVolumeLevel) * (e.target.value / maxVolumeLevel);
-      // console.log(`${soundSrc.name}: (${rangeElement.value} / ${maxVolumeLevel}) * ${e.target.value / maxVolumeLevel} = ${newVolumeLevel}`);
       audioElement.volume = newVolumeLevel;
     }
   };
