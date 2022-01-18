@@ -112,6 +112,18 @@
       "name": "Wind",
       "src": "https://www.soundjay.com/nature/sounds/wind-breeze-01.mp3",
       "imgSrc": ""
+    },
+    {
+      "id": "e5bf5f10-33a1-4814-a4ac-2703ee871d16",
+      "name": "Wind Chimes",
+      "src": "https://www.soundjay.com/misc/sounds/wind-chime-2.mp3",
+      "imgSrc": ""
+    },
+    {
+      "id": "05bb012b-0a00-48c8-ad68-a1ee2163c0f7",
+      "name": "Wind Chimes 2",
+      "src": "https://www.soundjay.com/misc/sounds/wind-chime-1.mp3",
+      "imgSrc": ""
     }
   ]
 }
