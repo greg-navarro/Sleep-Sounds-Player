@@ -23,6 +23,7 @@ nav {
   background-color: hsl(330, 85%, 40%);
   display: flex;
   flex-direction: row-reverse;
+  text-align:justify; 
 }
 
 .nav-link {
@@ -30,12 +31,11 @@ nav {
   height: auto;
   background-color: hsl(138, 82%, 22%);
   margin-left: 10px;
-  margin-right: 10px;
-  /* text-align:justify; */
-  /* width: auto; */
-  /* justify-content: center; */
-  padding: 15px;
-  display: inline-flex;
+  /* margin-right: 10px; */
+  justify-content: center;
+  /* padding: 15px; */
+  display: flex;
+  flex-direction: column;
 }
 .nav-link:hover {
   background-color: rgba(226, 214, 43, 0.884);
@@ -43,9 +43,27 @@ nav {
 
 .nav-link a {
   margin: 0 auto;
-  display: block;
+  display: flex;
+  background-color: rgba(11, 165, 49, 0.884);
+  text-align: center;
+  /* padding: 5px; */
+  justify-content: center;
+}
+
+nav a {
+  /* margin: 0 auto; */
+  /* display: inline-block; */
+  width: 20%;
+  height: auto;
+  /* height: auto; */
   background-color: rgba(11, 165, 49, 0.884);
   text-align: center;
   padding: 5px;
   
+}
+
+a .nav-link {
+  width: auto;
+  height: auto;
+  margin: 0 auto;
 }
