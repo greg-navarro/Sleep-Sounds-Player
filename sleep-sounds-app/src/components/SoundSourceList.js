@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SoundSource from "./SoundSource";
 import { PlayerContext } from "./Player";
 
@@ -20,12 +20,16 @@ export default function SoundSourceList({
       />);
   };
 
-  // Use current 'soundSources' data objects to initialize an array SoundSource React components.
-  const presentSoundSourceElements = soundSources.map(sound => initializeSoundSource(sound));
+  // Present: Use current 'soundSources' data objects to initialize an array SoundSource React components.
+  // CustomPlayer: initialize empty array
+  const [firstLoad, setFirstLoad] = useState(true);
+  console.log(firstLoad);
+  let presentSoundSourceElements = firstLoad && customPlayer ? [] : soundSources.map(sound => initializeSoundSource(sound));
+
   // Array of sound data objects in soundObjects but not in soundSources.
   // This will serve as the data for populating the Select element with Options.
-  const soundSourceIDs = soundSources.map(sound => sound.id);
-  const availableSounds = soundObjects.filter(sound => !soundSourceIDs.includes(sound.id));
+  let soundSourceIDs = firstLoad && customPlayer ? [] : soundSources.map(sound => sound.id);
+  let availableSounds = soundObjects.filter(sound => !soundSourceIDs.includes(sound.id));
 
 
   // Add sound sources to the list.
@@ -34,6 +38,10 @@ export default function SoundSourceList({
     const sourceToAdd = availableSounds[sourceIndex];
     registerNewSound(sourceToAdd);
   };
+
+  useEffect(() => {
+    setFirstLoad(false);
+  }, []);
 
   return (
     <>
