@@ -11,33 +11,106 @@
     },
     "rainy-day": {
       "name": "Rainy day sounds",
-      "sounds": [],
+      "sounds": [
+        "87b0b475-a5be-4kj5-85be-e7cbfb5ea17e",
+        "d02b6852-e261-4711-9538-5837cad539e2",
+        "77b0b475-a5be-4d15-85be-e7cbfb5ea17e"
+      ],
       "id": 2
+    },
+    "summer-bonfire": {
+      "name": "Summer bonfire",
+      "sounds": [
+        "97d0b23e-7152-4055-a50f-3d6e34bf279f",
+        "77b0b475-a5be-4d15-85be-e7cbfb5ea17e",
+        "b0b07658-51b3-4ea5-8f5f-3d3c07d5c7b5"
+      ],
+      "id": 3
     }
   },
   "sounds": [
     {
       "id": "97d0b23e-7152-4055-a50f-3d6e34bf279f",
-      "name": "fire",
+      "name": "Fire",
       "src": "https://www.soundjay.com/nature/sounds/campfire-1.mp3",
       "imgSrc": ""
     },
     {
       "id": "3934465c-6385-4397-8c8f-41ea76b0d97f",
-      "name": "highway",
+      "name": "Highway",
       "src": "https://www.soundjay.com/transportation/sounds/highway-1.mp3",
       "imgSrc": ""
     },
     {
       "id": "77b0b475-a5be-4d15-85be-e7cbfb5ea17e",
-      "name": "wave",
+      "name": "Wave",
       "src": "https://www.soundjay.com/nature/sounds/ocean-wave-1.mp3",
       "imgSrc": ""
     },
     {
       "id": "87b0b475-a5be-4kj5-85be-e7cbfb5ea17e",
-      "name": "wave2",
-      "src": "https://www.soundjay.com/nature/sounds/ocean-wave-2.mp3",
+      "name": "River 1",
+      "src": "https://www.soundjay.com/nature/sounds/river-1.mp3",
+      "imgSrc": ""
+    },
+    {
+      "id": "729f882d-74e6-4d62-a7b7-c9055d83deba",
+      "name": "River 2",
+      "src": "https://www.soundjay.com/nature/sounds/river-2.mp3",
+      "imgSrc": ""
+    },
+    {
+      "id": "e4455a96-3f47-433c-acba-f4972d05cc26",
+      "name": "River 3",
+      "src": "https://www.soundjay.com/nature/sounds/river-6.mp3",
+      "imgSrc": ""
+    },
+    {
+      "id": "c460d187-5b9b-43a0-b8f0-498d41a44d31",
+      "name": "Stream",
+      "src": "https://www.soundjay.com/nature/sounds/stream-1.mp3",
+      "imgSrc": ""
+    },
+    {
+      "id": "cc054d37-7a16-42e0-9b47-85b9ce5ce468",
+      "name": "Waterfall",
+      "src": "https://www.soundjay.com/nature/sounds/waterfall-1.mp3",
+      "imgSrc": ""
+    },
+    {
+      "id": "d6cc1f25-4efe-4db1-8501-fb901cc077b6",
+      "name": "Rain 1",
+      "src": "https://www.soundjay.com/nature/sounds/rain-01.mp3",
+      "imgSrc": ""
+    },
+    {
+      "id": "d02b6852-e261-4711-9538-5837cad539e2",
+      "name": "Rain 2",
+      "src": "https://www.soundjay.com/nature/sounds/rain-02.mp3",
+      "imgSrc": ""
+    },
+    {
+      "id": "acbdcd4e-ff2f-4af6-b3b4-a236b050a80e",
+      "name": "Rain 3",
+      "src": "https://www.soundjay.com/nature/sounds/rain-04.mp3",
+      "imgSrc": ""
+    },
+    {
+      "id": "ef3af4e0-6ddf-40f2-9e17-9ab33a1e9744",
+      "name": "Rain 4",
+      "src": "https://www.soundjay.com/nature/sounds/rain-07.mp3",
+      "imgSrc": ""
+    },
+    {
+      "id": "8066be66-1616-4cbb-ab58-c950e744461b",
+      "name": "Rain 5",
+      "src": "https://www.soundjay.com/nature/sounds/rain-06.mp3",
+      "imgSrc": ""
+    },
+    {
+      "id": "b0b07658-51b3-4ea5-8f5f-3d3c07d5c7b5",
+      "name": "Wind",
+      "src": "https://www.soundjay.com/nature/sounds/wind-breeze-01.mp3",
       "imgSrc": ""
     }
   ]
