@@ -6,7 +6,9 @@
 }
 
 #sounds-container {
-  
+  background-color: #ece7e7ed;
+  width: 40%;
+  margin: 10px auto;
 }
 
 #master-volume-container {
@@ -14,5 +16,8 @@
 }
 
 .sound-source {
-  margin: 10px auto;
+  /* margin: 10px auto; */
+  border-style: groove;
+  border-width: 2px;
+  padding: 10px;
 }
