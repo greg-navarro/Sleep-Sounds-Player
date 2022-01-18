@@ -17,7 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home presentOptions={presentOptions} />} />
           <Route path="/player/:id" element={<Player presentOptions={presentOptions} soundObjects={soundObjects} />} />
-          <Route path="/custom-player" element={<Player soundObjects={soundObjects} customPlayer={true} />} />
+          <Route path="/custom-player" element={<Player presentOptions={presentOptions} soundObjects={soundObjects} customPlayer={true} />} />
         </Routes>
       </div>
     </>
