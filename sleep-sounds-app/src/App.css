@@ -59,11 +59,12 @@ nav a {
   background-color: rgba(11, 165, 49, 0.884);
   text-align: center;
   padding: 5px;
-  
+  display: flex;
 }
 
 a .nav-link {
   width: auto;
   height: auto;
   margin: 0 auto;
+  
 }
