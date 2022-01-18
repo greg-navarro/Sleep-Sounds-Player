@@ -8,9 +8,9 @@ export function Navbar() {
       <h1>Sleep Sounds Player</h1>
       <nav>
         <Link to="/custom-player"><div className="nav-link"> Custom Player </div></Link>
-        <div className="nav-link"><Link to="/custom-player"> Custom Player </Link></div>
-        <div className="nav-link"><Link to="/"> Home </Link></div>
-        <Link to="/"> Home </Link>
+        <Link to="/"><div className="nav-link"> Home </div></Link>
+
+
       </nav>
     </div>
   );

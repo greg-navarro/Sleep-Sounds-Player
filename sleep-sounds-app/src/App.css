@@ -5,12 +5,7 @@
 
 .App-header {
   background-color: #282c34;
-  /* min-height: 10vh; */
   display: flex;  /*makes the div stick to top of screen*/
-  /* flex-direction: row; */
-  /* align-items: center; */
-  /* justify-content: center; */
-  /* font-size: calc(10px + 2vmin); */
   color: white;
 }
 
@@ -29,15 +24,12 @@ nav {
 .nav-link {
   width: 20%;
   height: auto;
-  background-color: hsl(138, 82%, 22%);
   margin-left: 10px;
-  /* margin-right: 10px; */
   justify-content: center;
-  /* padding: 15px; */
   display: flex;
   flex-direction: column;
 }
-.nav-link:hover {
+nav a:hover {
   background-color: rgba(226, 214, 43, 0.884);
 }
 
@@ -46,25 +38,21 @@ nav {
   display: flex;
   background-color: rgba(11, 165, 49, 0.884);
   text-align: center;
-  /* padding: 5px; */
   justify-content: center;
 }
 
 nav a {
-  /* margin: 0 auto; */
-  /* display: inline-block; */
   width: 20%;
   height: auto;
-  /* height: auto; */
   background-color: rgba(11, 165, 49, 0.884);
   text-align: center;
   padding: 5px;
   display: flex;
+  text-decoration: none;
 }
 
 a .nav-link {
   width: auto;
   height: auto;
   margin: 0 auto;
-  
 }
