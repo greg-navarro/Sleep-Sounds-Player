@@ -35,6 +35,7 @@ nav {
   /* width: auto; */
   /* justify-content: center; */
   padding: 15px;
+  display: inline-flex;
 }
 .nav-link:hover {
   background-color: rgba(226, 214, 43, 0.884);
