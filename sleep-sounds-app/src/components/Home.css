@@ -7,19 +7,25 @@ button a {
 }
 
 .present-list {
-  background-color: #FFFFFF;
-  /* color: #000; */
-  width: 50%;
+  background-color: #ece7e7ed;
+  width: 40%;
   margin: 10px auto;
 }
 
 .present-option {
-  border: solid;
+  border-style: groove;
+  border-width: 2px;
+}
+
+.present-option:hover {
+  background-color: rgb(162, 180, 190);
+  color: rgb(252, 248, 248);
 }
 
 .present-list a {
-  /* background-color: #FFFFFF; */
   color: #000;
-  
 }
 
+.present-list a:hover {
+  
+}
