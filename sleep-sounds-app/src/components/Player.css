@@ -1,0 +1,18 @@
+#play-container {
+  /* margin-top: 2%;
+  margin-bottom: 1%; */
+  /* margin: auto; */
+  margin: 10px auto;
+}
+
+#sounds-container {
+  
+}
+
+#master-volume-container {
+  margin: 10px auto;
+}
+
+.sound-source {
+  margin: 10px auto;
+}

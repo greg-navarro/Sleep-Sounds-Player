@@ -1,6 +1,7 @@
 import React, { useState, useRef, createContext } from 'react';
 import { useParams } from 'react-router-dom';
 import SoundSourceList from './SoundSourceList';
+import './Player.css';
 
 export const PlayerContext = createContext();
 
