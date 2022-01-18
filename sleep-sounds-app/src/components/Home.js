@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import "./Home.css";
 
 export default function Home({ presentOptions = {} }) {
   // SEARCH BAR DATA/FUNCTIONALITY
@@ -32,11 +33,13 @@ export default function Home({ presentOptions = {} }) {
         <button onClick={filterResults}>Search</button>
       </div>
       {/* each button links to a player page w/ id */}
-      {Object.values(displayedPresets).map((present, i) => (
-        <div key={i} >
-          <Link to={"/player/" + present.id}><p>{present.name}</p></Link>
-        </div>
-      ))}
+      <div class="present-list">
+        {Object.values(displayedPresets).map((present, i) => (
+          <div className="present-option" key={i} >
+            <Link to={"/player/" + present.id}><p>{present.name}</p></Link>
+          </div>
+        ))}
+      </div>
       {/* link to the custom player page */}
       <button><Link to="custom-player" >Make custom player</Link></button>
     </div>

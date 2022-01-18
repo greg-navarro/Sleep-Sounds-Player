@@ -9,8 +9,6 @@ export function Navbar() {
       <nav>
         <Link to="/custom-player"><div className="nav-link"> Custom Player </div></Link>
         <Link to="/"><div className="nav-link"> Home </div></Link>
-
-
       </nav>
     </div>
   );

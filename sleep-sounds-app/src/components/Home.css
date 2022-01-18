@@ -1,0 +1,25 @@
+.presents {
+  padding: 3vh;
+}
+
+button a {
+  color: #000;
+}
+
+.present-list {
+  background-color: #FFFFFF;
+  /* color: #000; */
+  width: 50%;
+  margin: 10px auto;
+}
+
+.present-option {
+  border: solid;
+}
+
+.present-list a {
+  /* background-color: #FFFFFF; */
+  color: #000;
+  
+}
+
