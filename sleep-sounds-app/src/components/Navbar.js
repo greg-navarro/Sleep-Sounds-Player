@@ -1,13 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../App.css";
 
 export function Navbar() {
   return (
-    <div>
+    <div className="App-header">
       <h1>Sleep Sounds Player</h1>
       <nav>
-        <Link to="/"> Home </Link>
-        <Link to="/custom-player"> Custom Player </Link>
+
+        <div className="nav-link"><Link to="/custom-player"> Custom Player </Link></div>
+        <div className="nav-link"><Link to="/"> Home </Link></div>
       </nav>
     </div>
   );

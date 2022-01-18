@@ -12,9 +12,7 @@ function App() {
 
   return (
     <>
-      <div className="App-header">
-        <Navbar />
-      </div>
+      <Navbar />
       <div className="App">
         <Routes>
           <Route path="/" element={<Home presentOptions={presentOptions} />} />
